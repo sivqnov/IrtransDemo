@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ИРТРАНС — glass макет</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0a1f3a;
+    --navy2:#0e2c52;
+    --blue:#2f7fe0;
+    --cyan:#36c6e0;
+    --amber:#f6a609;
+    --ink:#0a1f3a;
+    --glass:rgba(255,255,255,.10);
+    --glass-strong:rgba(255,255,255,.16);
+    --stroke:rgba(255,255,255,.22);
+    --txt:#eaf2ff;
+    --muted:#a9c0de;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Manrope',sans-serif;color:var(--txt);line-height:1.6;
+    background:#071831;
+    background-image:
+      radial-gradient(900px 500px at 12% 8%, rgba(54,198,224,.25), transparent 60%),
+      radial-gradient(800px 600px at 88% 18%, rgba(47,127,224,.30), transparent 60%),
+      radial-gradient(700px 700px at 75% 95%, rgba(246,166,9,.14), transparent 60%),
+      linear-gradient(160deg,#071831 0%,#0a1f3a 50%,#0b2b4d 100%);
+  }
+  h1,h2,h3,.dsp{font-family:'Sora',sans-serif;line-height:1.12;letter-spacing:-.02em}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  a{text-decoration:none;color:inherit}
+
+  .glass{background:var(--glass);border:1px solid var(--stroke);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    border-radius:22px;box-shadow:0 8px 32px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.18)}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:'Sora',sans-serif;font-weight:600;
+    padding:13px 26px;border-radius:999px;cursor:pointer;border:none;font-size:15px;transition:.18s}
+  .btn-amber{background:linear-gradient(135deg,#ffc24d,var(--amber));color:#241a00;box-shadow:0 6px 20px rgba(246,166,9,.4)}
+  .btn-amber:hover{transform:translateY(-2px)}
+  .btn-glass{background:var(--glass-strong);color:#fff;border:1px solid var(--stroke);backdrop-filter:blur(8px)}
+  .btn-glass:hover{background:rgba(255,255,255,.24)}
+  .chip{display:inline-flex;align-items:center;gap:6px;background:var(--glass-strong);border:1px solid var(--stroke);
+    padding:7px 15px;border-radius:999px;font-size:13px;font-weight:600;color:#dcebff}
+
+  /* NAV */
+  .nav-shell{position:sticky;top:16px;z-index:30;padding:0 24px;margin-top:16px}
+  .nav{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:26px;padding:12px 20px}
+  .logo{font-family:'Sora';font-weight:800;font-size:23px;letter-spacing:1px}
+  .logo b{color:var(--amber)}
+  .nav ul{list-style:none;display:flex;gap:24px;margin-left:8px}
+  .nav ul a{font-size:14px;font-weight:600;color:#cdddf3}
+  .nav ul a:hover{color:#fff}
+  .nav .right{margin-left:auto;display:flex;align-items:center;gap:16px}
+  .nav .ph{font-family:'Sora';font-weight:600;font-size:16px}
+
+  /* HERO */
+  .hero{padding:70px 0 30px}
+  .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center}
+  .hero h1{font-size:50px;font-weight:800;margin:18px 0 16px}
+  .hero h1 span{background:linear-gradient(120deg,var(--cyan),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{font-size:18px;color:var(--muted);max-width:520px;margin-bottom:28px}
+  .hero .cta{display:flex;gap:14px;flex-wrap:wrap}
+  .hero-aside{padding:26px}
+  .hero-aside h3{font-size:19px;margin-bottom:4px}
+  .hero-aside .sub{color:var(--muted);font-size:13px;margin-bottom:16px}
+  .field{margin-bottom:12px}
+  .field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:700}
+  .field select,.field input{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--stroke);
+    background:rgba(255,255,255,.08);color:#fff;font-family:inherit;font-size:14px;outline:none}
+  .field select option{color:#0a1f3a}
+  .res{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;border-radius:14px;
+    background:rgba(54,198,224,.14);border:1px solid rgba(54,198,224,.3);margin:6px 0 14px}
+  .res .l{font-size:13px;color:var(--muted)} .res .v{font-family:'Sora';font-weight:700;font-size:22px;color:#fff}
+
+  .stats{display:flex;gap:26px;margin-top:30px;flex-wrap:wrap}
+  .stats .s .n{font-family:'Sora';font-weight:800;font-size:30px;background:linear-gradient(120deg,#fff,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stats .s .t{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+
+  /* SECTION */
+  section{padding:54px 0}
+  .sh{text-align:center;margin-bottom:36px}
+  .sh .k{color:var(--cyan);font-weight:700;letter-spacing:2px;font-size:13px;text-transform:uppercase}
+  .sh h2{font-size:34px;font-weight:800;margin-top:8px}
+  .sh p{color:var(--muted);margin-top:8px}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .card{padding:24px;transition:.2s}
+  .card:hover{transform:translateY(-4px);background:var(--glass-strong)}
+  .card .ic{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+    font-size:24px;background:linear-gradient(135deg,rgba(47,127,224,.5),rgba(54,198,224,.35));border:1px solid var(--stroke);margin-bottom:14px}
+  .card h3{font-size:18px;margin-bottom:7px}
+  .card p{color:var(--muted);font-size:14px;margin-bottom:14px}
+  .card .more{color:var(--cyan);font-weight:700;font-size:14px}
+
+  /* PORTFOLIO */
+  .pf{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .pf .i{aspect-ratio:4/3;border-radius:18px;position:relative;overflow:hidden;display:flex;align-items:flex-end;
+    border:1px solid var(--stroke);background:linear-gradient(135deg,#2f7fe0,#0a1f3a)}
+  .pf .i:nth-child(2){background:linear-gradient(135deg,#36c6e0,#0a1f3a)}
+  .pf .i:nth-child(3){background:linear-gradient(135deg,#f6a609,#0a1f3a)}
+  .pf .i:nth-child(4){background:linear-gradient(135deg,#6aa9ef,#0a1f3a)}
+  .pf .i:nth-child(5){background:linear-gradient(135deg,#2f7fe0,#0a1f3a)}
+  .pf .i:nth-child(6){background:linear-gradient(135deg,#36c6e0,#0a1f3a)}
+  .pf .i:nth-child(7){background:linear-gradient(135deg,#f6a609,#0a1f3a)}
+  .pf .i:nth-child(8){background:linear-gradient(135deg,#6aa9ef,#0a1f3a)}
+  .pf .cap{padding:13px;font-family:'Sora';font-weight:600;font-size:13px;width:100%;
+    background:linear-gradient(transparent,rgba(0,0,0,.5))}
+
+  /* REVIEWS */
+  .rev{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .q{padding:24px} .q .m{font-family:'Sora';font-size:46px;color:var(--amber);line-height:.5;opacity:.5}
+  .q p{font-size:14px;color:#dbe7f7;margin:10px 0 14px}
+  .q .w{font-weight:700} .q .r{font-size:12px;color:var(--muted)}
+
+  /* FAQ */
+  .faq{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+  .ac{padding:16px 20px;cursor:pointer}
+  .ac .qrow{display:flex;justify-content:space-between;align-items:center;font-family:'Sora';font-weight:600;font-size:16px}
+  .ac .plus{color:var(--cyan);font-size:22px}
+  .ac .a{color:var(--muted);font-size:14px;margin-top:0;max-height:0;overflow:hidden;transition:.25s}
+  .ac.open .a{margin-top:10px;max-height:120px}
+  .ac.open .plus{transform:rotate(45deg)}
+
+  /* CONTACT */
+  .cwrap{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .cbox{padding:28px}
+  .cbox h3{font-size:20px;margin-bottom:16px}
+  .crow{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+  .crow .k{font-weight:700;min-width:110px} .crow .v{color:var(--muted)}
+  .map{margin-top:16px;height:140px;border-radius:16px;border:1px solid var(--stroke);
+    background:radial-gradient(circle at 40% 40%,rgba(54,198,224,.2),transparent 60%),rgba(255,255,255,.05);
+    display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px}
+  form .field input,form .field textarea{}
+  form .btn{width:100%;justify-content:center;margin-top:8px}
+
+  footer{padding:44px 0 26px;margin-top:30px}
+  .fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:28px}
+  .fgrid h4{font-family:'Sora';font-size:15px;margin-bottom:12px}
+  .fgrid a{display:block;color:var(--muted);padding:4px 0;font-size:14px} .fgrid a:hover{color:#fff}
+  .copy{text-align:center;color:#7d96b6;font-size:13px;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.1)}
+
+  @media(max-width:920px){
+    .hero .wrap,.cwrap,.fgrid{grid-template-columns:1fr}
+    .grid,.rev{grid-template-columns:1fr 1fr}
+    .pf{grid-template-columns:repeat(2,1fr)}
+    .nav ul,.nav .ph{display:none}
+    .hero h1{font-size:36px}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-shell"><div class="nav glass">
+  <div class="logo">ИР<b>ТРАНС</b></div>
+  <ul>
+    <li><a href="#">Ремонт авто</a></li>
+    <li><a href="#">Изделия из ПВХ</a></li>
+    <li><a href="#">Шины</a></li>
+    <li><a href="#">Работы</a></li>
+    <li><a href="#">Контакты</a></li>
+  </ul>
+  <div class="right">
+    <span class="ph">+375 29 712-08-04</span>
+    <button class="btn btn-amber">Заказать звонок</button>
+  </div>
+</div></div>
+
+<!-- HERO -->
+<div class="hero"><div class="wrap">
+  <div>
+    <span class="chip">● Производство и ремонт с 2002 года</span>
+    <h1>Тенты, фургоны и ремонт <span>грузовой техники</span> в Витебске</h1>
+    <p>Изготовление и ремонт автотентов, рефрижераторов и фургонов, кузовной ремонт, покраска, шиномонтаж и изделия из ткани ПВХ — под ключ.</p>
+    <div class="cta">
+      <button class="btn btn-amber">Рассчитать стоимость →</button>
+      <button class="btn btn-glass">Наши работы</button>
+    </div>
+    <div class="stats">
+      <div class="s"><div class="n">20+</div><div class="t">лет на рынке</div></div>
+      <div class="s"><div class="n">5000+</div><div class="t">работ выполнено</div></div>
+      <div class="s"><div class="n">2</div><div class="t">направления</div></div>
+      <div class="s"><div class="n">РФ</div><div class="t">перевозчики</div></div>
+    </div>
+  </div>
+  <div class="hero-aside glass">
+    <h3>Быстрый расчёт</h3>
+    <div class="sub">Узнайте ориентировочную стоимость за минуту</div>
+    <div class="field"><label>Тип работ</label><select><option>Изготовление автотента</option><option>Мягкие окна ПВХ</option><option>Грузовой шиномонтаж</option></select></div>
+    <div class="field"><label>Размеры / параметры</label><input type="text" placeholder="напр. 13,6 × 2,7 м"></div>
+    <div class="res"><span class="l">Ориентировочно</span><span class="v">от 1 850 руб.</span></div>
+    <button class="btn btn-amber" style="width:100%;justify-content:center">Получить точный расчёт</button>
+  </div>
+</div></div>
+
+<!-- SERVICES -->
+<section><div class="wrap">
+  <div class="sh"><div class="k">Ремонт и обслуживание</div><h2>Услуги для грузовой техники</h2></div>
+  <div class="grid">
+    <div class="card glass"><div class="ic">🚚</div><h3>Ремонт фургонов и рефрижераторов</h3><p>Полы, панели, двери, кабины, тентовые рукава. Восстановление изотермических фургонов.</p><span class="more">Подробнее →</span></div>
+    <div class="card glass"><div class="ic">🛠️</div><h3>Кузовной ремонт и покраска</h3><p>Большая покрасочная камера для грузовых авто, подбор цвета, гарантия на работы.</p><span class="more">Подробнее →</span></div>
+    <div class="card glass"><div class="ic">⚙️</div><h3>Грузовой шиномонтаж</h3><p>Колёса 14–26″: монтаж, балансировка, ремонт боковых порезов, вулканизация.</p><span class="more">Подробнее →</span></div>
+    <div class="card glass"><div class="ic">🏗️</div><h3>Каркасы, ворота, крыши</h3><p>Изготовление каркасов, сдвижных крыш и ворот под модель прицепа и полуприцепа.</p><span class="more">Подробнее →</span></div>
+    <div class="card glass"><div class="ic">✨</div><h3>Пескоструй и дробеструй</h3><p>Очистка металлоконструкций и деталей с последующей грунтовкой и покраской.</p><span class="more">Подробнее →</span></div>
+    <div class="card glass"><div class="ic">🔧</div><h3>Сварка в среде аргона</h3><p>Сварка алюминия и нержавейки, ремонт баков, изготовление металлоконструкций.</p><span class="more">Подробнее →</span></div>
+  </div>
+</div></section>
+
+<!-- PVH -->
+<section style="padding-top:0"><div class="wrap">
+  <div class="sh"><div class="k">Изделия из ткани ПВХ</div><h2>Тенты и тентовые конструкции</h2></div>
+  <div class="grid">
+    <div class="card glass"><div class="ic">🪟</div><h3>Мягкие окна и двери</h3><p>Для террас, веранд, беседок, кафе и павильонов. Прозрачный ПВХ любого размера.</p><span class="more">Подробнее →</span></div>
+    <div class="card glass"><div class="ic">⛺</div><h3>Павильоны, палатки, шатры</h3><p>Торговые павильоны и тентовые рестораны под ключ, садовые шатры и навесы.</p><span class="more">Подробнее →</span></div>
+    <div class="card glass"><div class="ic">🏭</div><h3>Фермы, ангары, склады</h3><p>Быстровозводимые тентовые и металлоконструкции производственного назначения.</p><span class="more">Подробнее →</span></div>
+    <div class="card glass"><div class="ic">📢</div><h3>Реклама на тентах</h3><p>Печать и нанесение рекламы на тенты, палатки и шатры, рекламные растяжки.</p><span class="more">Подробнее →</span></div>
+    <div class="card glass"><div class="ic">🛟</div><h3>Бассейны, ватрушки, укрытия</h3><p>Тентовые бассейны, сани-ватрушки, зонтики, навесы и укрытия из ткани ПВХ.</p><span class="more">Подробнее →</span></div>
+    <div class="card glass"><div class="ic">🧵</div><h3>Ремонт изделий из ПВХ</h3><p>Ремонт тентов, лодок, тентовых конструкций. Сварка и проклейка швов.</p><span class="more">Подробнее →</span></div>
+  </div>
+</div></section>
+
+<!-- PORTFOLIO -->
+<section><div class="wrap">
+  <div class="sh"><div class="k">Наши работы</div><h2>Примеры проектов</h2></div>
+  <div class="pf">
+    <div class="i"><div class="cap">Тент на полуприцеп</div></div>
+    <div class="i"><div class="cap">Ремонт рефрижератора</div></div>
+    <div class="i"><div class="cap">Мягкие окна для кафе</div></div>
+    <div class="i"><div class="cap">Торговый павильон</div></div>
+    <div class="i"><div class="cap">Покраска кабины</div></div>
+    <div class="i"><div class="cap">Тентовый ангар</div></div>
+    <div class="i"><div class="cap">Реклама на тенте</div></div>
+    <div class="i"><div class="cap">Каркас и крыша</div></div>
+  </div>
+  <div style="text-align:center;margin-top:26px"><button class="btn btn-glass">Открыть галерею</button></div>
+</div></section>
+
+<!-- REVIEWS -->
+<section style="padding-top:0"><div class="wrap">
+  <div class="sh"><div class="k">Отзывы</div><h2>Что говорят клиенты</h2></div>
+  <div class="rev">
+    <div class="q glass"><div class="m">“</div><p>Перешивали тент на фуру — сделали за два дня, всё аккуратно. Возим грузы из Смоленска, заезжаем регулярно.</p><div class="w">Сергей В.</div><div class="r">ИП, грузоперевозки</div></div>
+    <div class="q glass"><div class="m">“</div><p>Заказывали мягкие окна на террасу кафе. Замер, изготовление, монтаж — без нареканий. Зиму отстояли отлично.</p><div class="w">Ирина К.</div><div class="r">Кафе «Уют»</div></div>
+    <div class="q glass"><div class="m">“</div><p>Ремонт пола фургона и подготовка к техосмотру в одном месте — удобно. Цены адекватные, работают с НДС.</p><div class="w">ООО «ТрансЛогик»</div><div class="r">автопарк</div></div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section style="padding-top:0"><div class="wrap">
+  <div class="sh"><div class="k">Вопрос-ответ</div><h2>Частые вопросы</h2></div>
+  <div class="faq">
+    <div class="ac glass open"><div class="qrow">Колёса какого размера вы обслуживаете?<span class="plus">+</span></div><div class="a">Грузовой шиномонтаж — колёса от 14 до 26 дюймов: монтаж, балансировка, ремонт боковых порезов, вулканизация.</div></div>
+    <div class="ac glass"><div class="qrow">Выезжаете ли на замеры тентов?<span class="plus">+</span></div><div class="a">Да, выезжаем на замер перед изготовлением тентов и каркасных конструкций.</div></div>
+    <div class="ac glass"><div class="qrow">Работаете ли с перевозчиками из РФ?<span class="plus">+</span></div><div class="a">Да, обслуживаем клиентов из Смоленска, Пскова, Брянска и других приграничных регионов.</div></div>
+    <div class="ac glass"><div class="qrow">Можно ли оплатить по безналу?<span class="plus">+</span></div><div class="a">Да, работаем с НДС, возможен наличный и безналичный расчёт.</div></div>
+  </div>
+</div></section>
+
+<!-- CONTACT -->
+<section style="padding-top:0"><div class="wrap">
+  <div class="sh"><div class="k">Контакты</div><h2>Свяжитесь с нами</h2></div>
+  <div class="cwrap">
+    <div class="cbox glass">
+      <h3>Реквизиты и адрес</h3>
+      <div class="crow"><span class="k">Адрес</span><span class="v">г. Витебск, Бешенковичское шоссе, 40а</span></div>
+      <div class="crow"><span class="k">Телефоны</span><span class="v">+375 29 712-08-04, +375 212 61-87-73</span></div>
+      <div class="crow"><span class="k">Почта</span><span class="v">transavto2010@tut.by</span></div>
+      <div class="crow"><span class="k">Режим</span><span class="v">Пн–Пт 8:00–17:00 · Сб 8:00–14:00 (шиномонтаж)</span></div>
+      <div class="map">🗺️ Карта проезда (Яндекс.Карты)</div>
+    </div>
+    <div class="cbox glass">
+      <h3>Оставить заявку</h3>
+      <div class="field"><label>Ваше имя</label><input placeholder="Имя"></div>
+      <div class="field"><label>Телефон</label><input placeholder="+375 __ ___-__-__"></div>
+      <div class="field"><label>Что нужно сделать</label><textarea rows="3" placeholder="Кратко опишите задачу, можно приложить фото"></textarea></div>
+      <button class="btn btn-amber">Отправить заявку</button>
+    </div>
+  </div>
+</div></section>
+
+<!-- FOOTER -->
+<footer><div class="wrap"><div class="glass" style="padding:32px">
+  <div class="fgrid">
+    <div>
+      <div class="logo" style="font-size:22px">ИР<b>ТРАНС</b></div>
+      <p style="color:var(--muted);font-size:14px;margin-top:10px">ЧПУП «ИРТРАНС» — производство каркасно-тентовых конструкций и ремонт грузовой техники в Витебске с 2002 года.</p>
+    </div>
+    <div><h4>Услуги</h4><a href="#">Ремонт фургонов</a><a href="#">Кузовной ремонт</a><a href="#">Шиномонтаж</a><a href="#">Изделия из ПВХ</a></div>
+    <div><h4>Контакты</h4><a href="#">+375 29 712-08-04</a><a href="#">transavto2010@tut.by</a><a href="#">Витебск, Бешенковичское ш., 40а</a></div>
+  </div>
+  <div class="copy">© 2025 ЧПУП «ИРТРАНС». Демонстрационный прототип редизайна.</div>
+</div></div></footer>
+
+</body>
+</html>

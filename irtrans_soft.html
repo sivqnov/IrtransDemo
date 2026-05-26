@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ИРТРАНС — soft rounded макет</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e1622;          /* мягкий тёмно-синий графит */
+    --panel:#16202e;
+    --panel2:#1b2736;
+    --paper:#eef2f7;       /* светлая секция */
+    --paper2:#e3e9f1;
+    --ink:#14202e;
+    --steel:#8fa0b4;
+    --blue:#3b82e8;        /* холодный синий акцент */
+    --blue-bright:#5ea0ff;
+    --blue-soft:rgba(94,160,255,.14);
+    --txt:#e4ebf4;
+    --muted:#8394a8;
+    --r:22px;              /* базовый радиус */
+    --r-lg:30px;
+    --r-pill:999px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .round{font-family:'Fredoka',sans-serif}
+  h1,h2,h3{font-family:'Fredoka',sans-serif;font-weight:600;line-height:1.05;letter-spacing:-.01em}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+  a{text-decoration:none;color:inherit}
+  .accent{color:var(--blue-bright)}
+
+  /* HEADER */
+  header{position:sticky;top:18px;z-index:30;padding:0 28px}
+  header .bar{max-width:1200px;margin:0 auto;display:flex;align-items:center;height:68px;gap:36px;
+    background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:var(--r-pill);
+    padding:0 14px 0 28px;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+  .logo{font-family:'Fredoka';font-weight:700;font-size:22px;letter-spacing:1px}
+  .logo i{color:var(--blue-bright);font-style:normal}
+  nav{display:flex;gap:28px;margin-left:6px}
+  nav a{font-weight:700;font-size:15px;color:var(--steel)}
+  nav a:hover{color:#fff}
+  .head-r{margin-left:auto;display:flex;align-items:center;gap:18px}
+  .head-r .ph{font-family:'Fredoka';font-weight:600;font-size:16px}
+  .pill{border-radius:var(--r-pill);font-family:'Fredoka';font-weight:600;font-size:15px;padding:12px 24px;cursor:pointer;border:none;transition:.18s}
+  .pill-blue{background:var(--blue);color:#fff;box-shadow:0 8px 22px rgba(59,130,232,.4)}
+  .pill-blue:hover{background:var(--blue-bright);transform:translateY(-2px)}
+  .pill-soft{background:var(--blue-soft);color:#fff;border:1px solid rgba(94,160,255,.3)}
+  .pill-soft:hover{background:rgba(94,160,255,.22)}
+
+  /* HERO */
+  .hero{position:relative;overflow:hidden;padding-top:60px}
+  .hero::before{content:"";position:absolute;top:-120px;right:-60px;width:560px;height:560px;border-radius:50%;
+    background:radial-gradient(circle,rgba(94,160,255,.22),transparent 65%);filter:blur(10px)}
+  .hero .wrap{position:relative}
+  .tag{display:inline-flex;align-items:center;gap:9px;background:var(--panel);border:1px solid rgba(255,255,255,.07);
+    border-radius:var(--r-pill);padding:9px 18px;font-weight:700;font-size:13px;color:var(--steel);margin-bottom:26px}
+  .tag b{color:var(--blue-bright)}
+  .hero h1{font-size:clamp(42px,6.5vw,82px);font-weight:600;max-width:15ch;letter-spacing:-.02em}
+  .hero h1 em{font-style:normal;color:var(--blue-bright)}
+  .hero .lead{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-top:30px;flex-wrap:wrap}
+  .hero .lead p{max-width:440px;color:var(--steel);font-size:17px}
+  .hero .acts{display:flex;gap:14px}
+  .pill.lg{padding:16px 32px;font-size:16px}
+
+  /* STATS — скруглённые «таблетки» */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px}
+  .stats .s{background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:24px 26px}
+  .stats .n{font-family:'Fredoka';font-weight:600;font-size:38px;letter-spacing:-.02em}
+  .stats .t{color:var(--muted);font-size:13px;font-weight:700;margin-top:2px}
+
+  /* BLOCK */
+  .block{padding:64px 0}
+  .blockhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;flex-wrap:wrap;gap:10px}
+  .blockhead h2{font-size:clamp(28px,4vw,44px)}
+  .blockhead .meta{background:var(--blue-soft);color:var(--blue-bright);border-radius:var(--r-pill);
+    padding:7px 16px;font-weight:700;font-size:13px}
+
+  /* SERVICES — список-таблетки, скруглённые */
+  .rows{display:flex;flex-direction:column;gap:12px}
+  .row{display:grid;grid-template-columns:54px 1.05fr 1.5fr 40px;gap:22px;align-items:center;
+    background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);
+    padding:22px 26px;transition:.18s;cursor:pointer}
+  .row:hover{background:var(--panel2);transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.28);border-color:rgba(94,160,255,.3)}
+  .row .idx{width:42px;height:42px;border-radius:50%;background:var(--blue-soft);color:var(--blue-bright);
+    display:flex;align-items:center;justify-content:center;font-family:'Fredoka';font-weight:600;font-size:15px}
+  .row .name{font-family:'Fredoka';font-weight:600;font-size:20px}
+  .row .desc{color:var(--steel);font-size:15px}
+  .row .arrow{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;
+    color:var(--steel);font-size:18px;transition:.18s}
+  .row:hover .arrow{background:var(--blue);color:#fff;transform:translateX(3px)}
+
+  /* PVH — светлая секция со скруглением сверху/снизу */
+  .paper{background:var(--paper);color:var(--ink);border-radius:var(--r-lg);margin:0 28px}
+  .paper .wrap{padding-left:0;padding-right:0;max-width:1144px}
+  .paper .blockhead .meta{background:rgba(59,130,232,.12);color:var(--blue)}
+  .paper .row{background:#fff;border-color:rgba(20,32,46,.08);box-shadow:0 4px 14px rgba(20,32,46,.05)}
+  .paper .row:hover{background:#fff;border-color:rgba(59,130,232,.35);box-shadow:0 14px 30px rgba(20,32,46,.12)}
+  .paper .row .name{color:var(--ink)}
+  .paper .row .desc{color:#5a6776}
+  .paper .row .idx{background:rgba(59,130,232,.12);color:var(--blue)}
+  .paper .row .arrow{background:rgba(20,32,46,.05);color:#8a97a6}
+  .paper .row:hover .arrow{background:var(--blue);color:#fff}
+
+  /* CALC — мягкая карточка */
+  .calc-card{background:linear-gradient(135deg,var(--panel2),var(--panel));border:1px solid rgba(255,255,255,.07);
+    border-radius:var(--r-lg);padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:center;
+    box-shadow:0 20px 50px rgba(0,0,0,.3);position:relative;overflow:hidden}
+  .calc-card::before{content:"";position:absolute;top:-80px;left:-40px;width:300px;height:300px;border-radius:50%;
+    background:radial-gradient(circle,rgba(94,160,255,.18),transparent 60%)}
+  .calc-card .l{position:relative}
+  .calc-card h2{font-size:38px;margin-bottom:14px}
+  .calc-card p{color:var(--steel);max-width:380px}
+  .calc-form{position:relative}
+  .lbl{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:7px;display:block}
+  .ctrl{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;
+    color:#fff;padding:14px 16px;font-family:inherit;font-size:15px;margin-bottom:16px;outline:none}
+  .ctrl:focus{border-color:var(--blue-bright)}
+  .ctrl option{color:#000}
+  .calcres{display:flex;justify-content:space-between;align-items:center;background:var(--blue-soft);
+    border:1px solid rgba(94,160,255,.3);border-radius:16px;padding:16px 20px;margin-bottom:16px}
+  .calcres .cl{color:var(--steel);font-size:13px;font-weight:700} .calcres .cv{font-family:'Fredoka';font-weight:600;font-size:28px;color:var(--blue-bright)}
+
+  /* PORTFOLIO — скруглённая мозаика */
+  .pf{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:160px;gap:14px}
+  .pf .i{position:relative;overflow:hidden;border-radius:var(--r);display:flex;align-items:flex-end;
+    background:linear-gradient(135deg,#27486e,#0e1622)}
+  .pf .i:nth-child(1){grid-column:span 4;grid-row:span 2;background:linear-gradient(135deg,#2f5a8a,#0e1622)}
+  .pf .i:nth-child(2){grid-column:span 2;background:linear-gradient(135deg,#3b82e8,#0e1622)}
+  .pf .i:nth-child(3){grid-column:span 2;background:linear-gradient(135deg,#22405f,#0e1622)}
+  .pf .i:nth-child(4){grid-column:span 3;background:linear-gradient(135deg,#356192,#0e1622)}
+  .pf .i:nth-child(5){grid-column:span 3;background:linear-gradient(135deg,#2a4d75,#0e1622)}
+  .pf .cap{padding:16px;font-family:'Fredoka';font-weight:600;font-size:15px;width:100%;
+    background:linear-gradient(transparent,rgba(0,0,0,.6))}
+  .pf .cap small{display:block;font-family:'Nunito';font-weight:600;color:var(--steel);font-size:12px}
+
+  /* REVIEWS — скруглённые карточки */
+  .rev{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .rev .q{background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:28px}
+  .rev .stars{color:var(--blue-bright);letter-spacing:3px;font-size:14px;margin-bottom:14px}
+  .rev .q p{font-size:15px;margin-bottom:16px}
+  .rev .who{font-family:'Fredoka';font-weight:600}
+  .rev .role{color:var(--muted);font-size:13px;font-weight:700}
+
+  /* FAQ — таблетки */
+  .faq{display:flex;flex-direction:column;gap:12px;max-width:820px;margin:0 auto}
+  .ac{background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:20px 26px;cursor:pointer;transition:.15s}
+  .ac:hover{border-color:rgba(94,160,255,.25)}
+  .ac .qr{display:flex;justify-content:space-between;gap:20px;align-items:center;font-family:'Fredoka';font-weight:600;font-size:18px}
+  .ac .pl{width:30px;height:30px;border-radius:50%;background:var(--blue-soft);color:var(--blue-bright);
+    display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+  .ac .an{color:var(--steel);max-height:0;overflow:hidden;transition:.25s;font-size:15px}
+  .ac.open .an{max-height:130px;margin-top:12px}
+
+  /* CONTACT */
+  .cwrap{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .cbox{background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:var(--r-lg);padding:38px}
+  .cbox h2{font-size:30px;margin-bottom:22px}
+  .irow{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+  .irow .k{font-size:12px;font-weight:800;text-transform:uppercase;color:var(--muted);min-width:80px;letter-spacing:.5px}
+  .irow .v{color:var(--txt)}
+  .map{margin-top:18px;height:130px;border-radius:16px;border:1px solid rgba(255,255,255,.1);
+    background:radial-gradient(circle at 40% 40%,rgba(94,160,255,.2),transparent 60%),rgba(255,255,255,.04);
+    display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px}
+  .cbox .pill{width:100%;margin-top:6px}
+
+  /* FOOTER */
+  footer{padding:56px 0 30px}
+  .fcard{background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:var(--r-lg);padding:40px}
+  .fg{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}
+  .fg p{color:var(--muted);font-size:14px;max-width:340px;margin-top:12px}
+  .fg h4{font-family:'Fredoka';font-size:15px;font-weight:600;margin-bottom:14px}
+  .fg a{display:block;color:var(--muted);padding:5px 0;font-size:15px} .fg a:hover{color:#fff}
+  .fcopy{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;
+    color:var(--muted);font-size:13px;font-weight:700;flex-wrap:wrap;gap:10px}
+
+  @media(max-width:920px){
+    nav,.head-r .ph{display:none}
+    .stats{grid-template-columns:1fr 1fr}
+    .row{grid-template-columns:42px 1fr 36px;gap:14px}.row .desc{display:none}
+    .calc-card,.cwrap,.fg{grid-template-columns:1fr;gap:26px}
+    .rev{grid-template-columns:1fr}
+    .pf{grid-template-columns:1fr 1fr}.pf .i{grid-column:span 1 !important;grid-row:span 1 !important}
+    .hero h1{font-size:40px}
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header><div class="bar">
+  <div class="logo">ИР<i>ТРАНС</i></div>
+  <nav>
+    <a href="#">Ремонт авто</a>
+    <a href="#">Изделия ПВХ</a>
+    <a href="#">Шины</a>
+    <a href="#">Работы</a>
+    <a href="#">Контакты</a>
+  </nav>
+  <div class="head-r">
+    <span class="ph">+375 29 712-08-04</span>
+    <button class="pill pill-blue">Заказать звонок</button>
+  </div>
+</div></header>
+
+<!-- HERO -->
+<div class="hero"><div class="wrap">
+  <span class="tag"><b>●</b> Витебск · производство и ремонт с 2002 года</span>
+  <h1>Тенты, фургоны и ремонт <em>грузовой</em> техники</h1>
+  <div class="lead">
+    <p>Изготовление и ремонт автотентов, рефрижераторов и фургонов, кузовной ремонт, покраска, шиномонтаж и изделия из ткани ПВХ — под ключ.</p>
+    <div class="acts">
+      <button class="pill pill-blue lg">Рассчитать стоимость</button>
+      <button class="pill pill-soft lg">Наши работы</button>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="s"><div class="n">20+</div><div class="t">лет на рынке</div></div>
+    <div class="s"><div class="n">5000+</div><div class="t">работ выполнено</div></div>
+    <div class="s"><div class="n">2</div><div class="t">направления под ключ</div></div>
+    <div class="s"><div class="n">РФ</div><div class="t">перевозчики · Смоленск, Псков</div></div>
+  </div>
+</div></div>
+
+<!-- SERVICES: РЕМОНТ -->
+<div class="block"><div class="wrap">
+  <div class="blockhead"><h2>Ремонт и обслуживание</h2><span class="meta">6 направлений</span></div>
+  <div class="rows">
+    <div class="row"><span class="idx">01</span><span class="name">Ремонт фургонов и рефрижераторов</span><span class="desc">Полы, панели, двери, кабины, тентовые рукава. Восстановление изотермических фургонов.</span><span class="arrow">→</span></div>
+    <div class="row"><span class="idx">02</span><span class="name">Кузовной ремонт и покраска</span><span class="desc">Большая покрасочная камера для грузовых авто, подбор цвета, гарантия на работы.</span><span class="arrow">→</span></div>
+    <div class="row"><span class="idx">03</span><span class="name">Грузовой шиномонтаж</span><span class="desc">Колёса 14–26″: монтаж, балансировка, ремонт боковых порезов, вулканизация.</span><span class="arrow">→</span></div>
+    <div class="row"><span class="idx">04</span><span class="name">Каркасы, ворота, сдвижные крыши</span><span class="desc">Изготовление под модель прицепа и полуприцепа.</span><span class="arrow">→</span></div>
+    <div class="row"><span class="idx">05</span><span class="name">Пескоструй и дробеструй</span><span class="desc">Очистка металлоконструкций и деталей с последующей грунтовкой и покраской.</span><span class="arrow">→</span></div>
+    <div class="row"><span class="idx">06</span><span class="name">Сварка в среде аргона</span><span class="desc">Сварка алюминия и нержавейки, ремонт баков, металлоконструкции под заказ.</span><span class="arrow">→</span></div>
+  </div>
+</div></div>
+
+<!-- SERVICES: ПВХ (светлая скруглённая секция) -->
+<div class="block paper"><div class="wrap" style="padding:0 38px">
+  <div class="blockhead"><h2>Изделия из ткани ПВХ</h2><span class="meta">6 категорий</span></div>
+  <div class="rows">
+    <div class="row"><span class="idx">01</span><span class="name">Мягкие окна и двери</span><span class="desc">Для террас, веранд, беседок, кафе и павильонов. Прозрачный ПВХ любого размера.</span><span class="arrow">→</span></div>
+    <div class="row"><span class="idx">02</span><span class="name">Павильоны, палатки, шатры</span><span class="desc">Торговые павильоны и тентовые рестораны под ключ, садовые шатры и навесы.</span><span class="arrow">→</span></div>
+    <div class="row"><span class="idx">03</span><span class="name">Фермы, ангары, склады</span><span class="desc">Быстровозводимые тентовые и металлоконструкции производственного назначения.</span><span class="arrow">→</span></div>
+    <div class="row"><span class="idx">04</span><span class="name">Реклама на тентах</span><span class="desc">Печать и нанесение рекламы на тенты, палатки и шатры, рекламные растяжки.</span><span class="arrow">→</span></div>
+    <div class="row"><span class="idx">05</span><span class="name">Бассейны, ватрушки, укрытия</span><span class="desc">Тентовые бассейны, сани-ватрушки, зонтики, навесы и укрытия из ткани ПВХ.</span><span class="arrow">→</span></div>
+    <div class="row"><span class="idx">06</span><span class="name">Ремонт изделий из ПВХ</span><span class="desc">Ремонт тентов, лодок, тентовых конструкций. Сварка и проклейка швов.</span><span class="arrow">→</span></div>
+  </div>
+</div></div>
+
+<!-- CALC -->
+<div class="block"><div class="wrap">
+  <div class="calc-card">
+    <div class="l">
+      <h2>Расчёт за минуту</h2>
+      <p>Не нужно ждать менеджера, чтобы понять порядок цены. Укажите параметры — получите ориентир сразу. Точный расчёт — после короткой заявки.</p>
+    </div>
+    <div class="calc-form">
+      <span class="lbl">Тип работ</span>
+      <select class="ctrl"><option>Изготовление автотента</option><option>Мягкие окна ПВХ</option><option>Грузовой шиномонтаж</option></select>
+      <span class="lbl">Размеры / параметры</span>
+      <input class="ctrl" placeholder="напр. 13,6 × 2,7 м">
+      <div class="calcres"><span class="cl">Ориентировочно</span><span class="cv">от 1 850 руб.</span></div>
+      <button class="pill pill-blue" style="width:100%">Получить точный расчёт</button>
+    </div>
+  </div>
+</div></div>
+
+<!-- PORTFOLIO -->
+<div class="block" style="padding-top:0"><div class="wrap">
+  <div class="blockhead"><h2>Наши работы</h2><span class="meta">галерея проектов</span></div>
+  <div class="pf">
+    <div class="i"><div class="cap">Тент на полуприцеп<small>пошив · 13,6 м</small></div></div>
+    <div class="i"><div class="cap">Ремонт рефрижератора</div></div>
+    <div class="i"><div class="cap">Мягкие окна · кафе</div></div>
+    <div class="i"><div class="cap">Торговый павильон</div></div>
+    <div class="i"><div class="cap">Тентовый ангар</div></div>
+  </div>
+</div></div>
+
+<!-- REVIEWS -->
+<div class="block" style="padding-top:0"><div class="wrap">
+  <div class="blockhead"><h2>Отзывы</h2><span class="meta">клиенты</span></div>
+  <div class="rev">
+    <div class="q"><div class="stars">★★★★★</div><p>Перешивали тент на фуру — сделали за два дня, всё аккуратно. Возим грузы из Смоленска, заезжаем регулярно.</p><div class="who">Сергей В.</div><div class="role">ИП · грузоперевозки</div></div>
+    <div class="q"><div class="stars">★★★★★</div><p>Заказывали мягкие окна на террасу кафе. Замер, изготовление, монтаж — без нареканий. Зиму отстояли отлично.</p><div class="who">Ирина К.</div><div class="role">Кафе «Уют»</div></div>
+    <div class="q"><div class="stars">★★★★★</div><p>Ремонт пола фургона и подготовка к техосмотру в одном месте — удобно. Цены адекватные, работают с НДС.</p><div class="who">ООО «ТрансЛогик»</div><div class="role">автопарк</div></div>
+  </div>
+</div></div>
+
+<!-- FAQ -->
+<div class="block" style="padding-top:0"><div class="wrap">
+  <div class="blockhead" style="justify-content:center;text-align:center"><h2>Частые вопросы</h2></div>
+  <div class="faq">
+    <div class="ac open"><div class="qr">Колёса какого размера вы обслуживаете?<span class="pl">−</span></div><div class="an">Грузовой шиномонтаж — колёса от 14 до 26 дюймов: монтаж, балансировка, ремонт боковых порезов, вулканизация.</div></div>
+    <div class="ac"><div class="qr">Выезжаете ли на замеры тентов?<span class="pl">+</span></div><div class="an">Да, выезжаем на замер перед изготовлением тентов и каркасных конструкций.</div></div>
+    <div class="ac"><div class="qr">Работаете ли с перевозчиками из РФ?<span class="pl">+</span></div><div class="an">Да, обслуживаем клиентов из Смоленска, Пскова, Брянска и других приграничных регионов.</div></div>
+    <div class="ac"><div class="qr">Можно ли оплатить по безналу?<span class="pl">+</span></div><div class="an">Да, работаем с НДС, возможен наличный и безналичный расчёт.</div></div>
+  </div>
+</div></div>
+
+<!-- CONTACT -->
+<div class="block" style="padding-top:0"><div class="wrap">
+  <div class="cwrap">
+    <div class="cbox">
+      <h2>Контакты</h2>
+      <div class="irow"><span class="k">адрес</span><span class="v">г. Витебск, Бешенковичское шоссе, 40а</span></div>
+      <div class="irow"><span class="k">тел</span><span class="v">+375 29 712-08-04 · +375 212 61-87-73</span></div>
+      <div class="irow"><span class="k">почта</span><span class="v">transavto2010@tut.by</span></div>
+      <div class="irow"><span class="k">режим</span><span class="v">Пн–Пт 8:00–17:00 · Сб 8:00–14:00 (шиномонтаж)</span></div>
+      <div class="map">🗺️ Карта проезда (Яндекс.Карты)</div>
+    </div>
+    <div class="cbox">
+      <h2>Оставить заявку</h2>
+      <span class="lbl">Имя</span><input class="ctrl" placeholder="Ваше имя">
+      <span class="lbl">Телефон</span><input class="ctrl" placeholder="+375 __ ___-__-__">
+      <span class="lbl">Задача</span><input class="ctrl" placeholder="Что нужно сделать">
+      <button class="pill pill-blue">Отправить заявку</button>
+    </div>
+  </div>
+</div></div>
+
+<!-- FOOTER -->
+<footer><div class="wrap"><div class="fcard">
+  <div class="fg">
+    <div>
+      <div class="logo" style="font-size:22px">ИР<i>ТРАНС</i></div>
+      <p>ЧПУП «ИРТРАНС» — производство каркасно-тентовых конструкций и ремонт грузовой техники в Витебске с 2002 года.</p>
+    </div>
+    <div><h4>Услуги</h4><a href="#">Ремонт фургонов</a><a href="#">Кузовной ремонт</a><a href="#">Шиномонтаж</a><a href="#">Изделия из ПВХ</a></div>
+    <div><h4>Контакты</h4><a href="#">+375 29 712-08-04</a><a href="#">transavto2010@tut.by</a><a href="#">Бешенковичское ш., 40а</a></div>
+  </div>
+  <div class="fcopy"><span>© 2025 ЧПУП «ИРТРАНС»</span><span>Демонстрационный прототип редизайна</span></div>
+</div></div></footer>
+
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ИРТРАНС — blueprint макет</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#eef1ec;       /* бумага/калька */
+    --ink:#16202b;         /* чернила */
+    --blue:#1f4e79;        /* чертёжный синий */
+    --blue2:#2f6fb0;
+    --line:#c3ccc0;        /* линии сетки */
+    --line2:#aab4a8;
+    --red:#b4452f;         /* красная разметка */
+    --muted:#6c7a6a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Space Grotesk',sans-serif;color:var(--ink);line-height:1.55;
+    background:var(--paper);
+    background-image:
+      linear-gradient(var(--line) 1px,transparent 1px),
+      linear-gradient(90deg,var(--line) 1px,transparent 1px),
+      linear-gradient(rgba(170,180,168,.5) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(170,180,168,.5) 1px,transparent 1px);
+    background-size:100px 100px,100px 100px,20px 20px,20px 20px;
+  }
+  .mono{font-family:'IBM Plex Mono',monospace}
+  h1,h2,h3{font-weight:700;line-height:1.05;letter-spacing:-.01em}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+  a{text-decoration:none;color:inherit}
+
+  /* рамка-чертёж вокруг всего */
+  .frame{border:1.5px solid var(--ink);margin:18px;background:rgba(238,241,236,.55);backdrop-filter:blur(1px)}
+  .corner{position:fixed;width:14px;height:14px;border:1.5px solid var(--ink);z-index:50;background:var(--paper)}
+  .corner.tl{top:11px;left:11px}.corner.tr{top:11px;right:11px}.corner.bl{bottom:11px;left:11px}.corner.br{bottom:11px;right:11px}
+
+  /* HEADER */
+  header{border-bottom:1.5px solid var(--ink)}
+  header .wrap{display:flex;align-items:center;height:72px;gap:36px}
+  .logo{font-weight:700;font-size:22px;letter-spacing:2px;display:flex;align-items:center;gap:10px}
+  .logo .b{width:26px;height:26px;border:1.5px solid var(--blue);position:relative}
+  .logo .b::after{content:"";position:absolute;inset:5px;border:1.5px solid var(--red)}
+  .logo i{font-style:normal;color:var(--blue)}
+  nav{display:flex;gap:26px;margin-left:8px}
+  nav a{font-family:'IBM Plex Mono';font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink);position:relative}
+  nav a:hover{color:var(--blue)}
+  nav a::before{content:"";position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--blue);transition:.2s}
+  nav a:hover::before{width:100%}
+  .head-r{margin-left:auto;display:flex;align-items:center;gap:20px}
+  .head-r .ph{font-family:'IBM Plex Mono';font-weight:600;font-size:15px}
+  .head-cta{border:1.5px solid var(--ink);background:var(--blue);color:#fff;font-family:'IBM Plex Mono';
+    font-size:13px;text-transform:uppercase;letter-spacing:.5px;padding:11px 20px;cursor:pointer;transition:.15s}
+  .head-cta:hover{background:var(--blue2)}
+
+  /* стикер-аннотация */
+  .ann{font-family:'IBM Plex Mono';font-size:12px;color:var(--blue);text-transform:uppercase;letter-spacing:1px;
+    display:inline-flex;align-items:center;gap:8px}
+  .ann::before{content:"◢";font-size:9px;color:var(--red)}
+
+  /* HERO */
+  .hero{border-bottom:1.5px solid var(--ink);position:relative}
+  .hero .wrap{padding:54px 28px 60px;position:relative}
+  .hero .ann{margin-bottom:22px}
+  .hero h1{font-size:clamp(40px,6.2vw,78px);font-weight:700;max-width:16ch;letter-spacing:-.02em}
+  .hero h1 em{font-style:normal;color:var(--blue);border-bottom:3px solid var(--red);padding-bottom:2px}
+  .hero .lead{display:flex;gap:46px;margin-top:32px;flex-wrap:wrap;align-items:flex-end}
+  .hero .lead p{max-width:430px;color:#3c4940;font-size:17px}
+  .acts{display:flex;gap:0}
+  .btn{font-family:'IBM Plex Mono';font-size:14px;text-transform:uppercase;letter-spacing:.5px;
+    padding:15px 28px;cursor:pointer;border:1.5px solid var(--ink);transition:.15s;background:var(--paper)}
+  .btn-blue{background:var(--blue);color:#fff;border-right:none}
+  .btn-blue:hover{background:var(--blue2)}
+  .btn-out:hover{background:#e2e6dd}
+  /* размерная линия */
+  .dimline{position:absolute;right:28px;top:54px;font-family:'IBM Plex Mono';font-size:11px;color:var(--red);
+    writing-mode:vertical-rl;display:flex;align-items:center;gap:8px;height:180px;border-right:1px dashed var(--red);padding-right:8px}
+
+  /* STATS */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1.5px solid var(--ink)}
+  .stats .s{padding:24px 28px;border-right:1px dashed var(--line2);position:relative}
+  .stats .s:last-child{border-right:none}
+  .stats .n{font-weight:700;font-size:40px;letter-spacing:-.02em;color:var(--blue)}
+  .stats .t{font-family:'IBM Plex Mono';font-size:11px;text-transform:uppercase;color:var(--muted);margin-top:2px}
+  .stats .ref{position:absolute;top:8px;right:10px;font-family:'IBM Plex Mono';font-size:10px;color:var(--red)}
+
+  /* BLOCK */
+  .block{padding:56px 0;border-bottom:1.5px solid var(--ink)}
+  .blockhead{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:26px;flex-wrap:wrap;gap:10px}
+  .blockhead h2{font-size:clamp(26px,3.6vw,40px)}
+  .blockhead h2 .num{font-family:'IBM Plex Mono';color:var(--red);font-size:.5em;vertical-align:super;margin-right:8px}
+
+  /* SERVICES — спецификация */
+  .spec{border:1.5px solid var(--ink)}
+  .spec .r{display:grid;grid-template-columns:70px 1fr 1.5fr 90px;border-bottom:1px dashed var(--line2);transition:.12s;cursor:pointer}
+  .spec .r:last-child{border-bottom:none}
+  .spec .r:hover{background:rgba(31,78,121,.06)}
+  .spec .c{padding:20px 18px;border-right:1px dashed var(--line2);display:flex;align-items:center}
+  .spec .c:last-child{border-right:none}
+  .spec .code{font-family:'IBM Plex Mono';color:var(--blue);font-size:14px;font-weight:600}
+  .spec .name{font-weight:600;font-size:19px}
+  .spec .desc{color:#566254;font-size:14px}
+  .spec .act{font-family:'IBM Plex Mono';font-size:12px;color:var(--red);justify-content:center;text-transform:uppercase}
+
+  /* CALC — лист спецификации */
+  .calc{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--ink)}
+  .calc .l{padding:42px;border-right:1.5px solid var(--ink)}
+  .calc .l h2{font-size:34px;margin-bottom:14px}
+  .calc .l p{color:#3c4940;max-width:380px}
+  .calc .l .tstamp{margin-top:26px;border:1.5px solid var(--red);color:var(--red);display:inline-block;
+    padding:8px 16px;font-family:'IBM Plex Mono';font-size:12px;text-transform:uppercase;letter-spacing:1px;transform:rotate(-3deg)}
+  .calc .r{padding:42px}
+  .lbl{font-family:'IBM Plex Mono';font-size:11px;text-transform:uppercase;color:var(--muted);margin-bottom:7px;display:block;letter-spacing:.5px}
+  .ctrl{width:100%;background:var(--paper);border:1.5px solid var(--ink);color:var(--ink);padding:13px 15px;
+    font-family:'IBM Plex Mono';font-size:15px;margin-bottom:18px}
+  .calcres{display:flex;justify-content:space-between;align-items:center;border:1.5px solid var(--blue);
+    background:rgba(31,78,121,.06);padding:15px 18px;margin-bottom:18px}
+  .calcres .cl{font-family:'IBM Plex Mono';font-size:12px;color:var(--muted)}
+  .calcres .cv{font-weight:700;font-size:30px;color:var(--blue)}
+
+  /* PORTFOLIO — чертёжные карточки */
+  .pf{display:grid;grid-template-columns:repeat(3,1fr);gap:-1.5px}
+  .pf .i{border:1.5px solid var(--ink);margin:-.75px;aspect-ratio:4/3;position:relative;
+    background:repeating-linear-gradient(45deg,rgba(31,78,121,.05) 0 10px,transparent 10px 20px);
+    display:flex;flex-direction:column;justify-content:space-between;padding:16px}
+  .pf .i .tag2{font-family:'IBM Plex Mono';font-size:10px;color:var(--red);align-self:flex-start;border:1px solid var(--red);padding:2px 6px}
+  .pf .i .schematic{flex:1;display:flex;align-items:center;justify-content:center;color:var(--blue2);opacity:.5;font-size:40px}
+  .pf .cap{font-family:'IBM Plex Mono';font-size:13px}
+  .pf .cap small{display:block;color:var(--muted);font-size:11px}
+
+  /* REVIEWS */
+  .rev{display:grid;grid-template-columns:repeat(3,1fr);border:1.5px solid var(--ink)}
+  .rev .q{padding:28px;border-right:1px dashed var(--line2)}
+  .rev .q:last-child{border-right:none}
+  .rev .q .st{font-family:'IBM Plex Mono';color:var(--red);font-size:12px;margin-bottom:12px}
+  .rev .q p{font-size:15px;margin-bottom:16px}
+  .rev .q .who{font-weight:600}
+  .rev .q .role{font-family:'IBM Plex Mono';font-size:11px;color:var(--muted)}
+
+  /* FAQ */
+  .faq{border:1.5px solid var(--ink)}
+  .ac{border-bottom:1px dashed var(--line2);padding:22px 24px;cursor:pointer}
+  .ac:last-child{border-bottom:none}
+  .ac .qr{display:flex;justify-content:space-between;gap:18px;align-items:center;font-weight:600;font-size:18px}
+  .ac .qr .qn{font-family:'IBM Plex Mono';color:var(--blue);font-size:13px;margin-right:12px}
+  .ac .pl{font-family:'IBM Plex Mono';color:var(--red);font-size:20px}
+  .ac .an{color:#566254;max-height:0;overflow:hidden;transition:.25s;font-size:15px;padding-left:38px}
+  .ac.open .an{max-height:130px;margin-top:12px}
+
+  /* CONTACT */
+  .contact{border:1.5px solid var(--ink);display:grid;grid-template-columns:1fr 1fr}
+  .contact .info{padding:40px;border-right:1.5px solid var(--ink)}
+  .contact .form{padding:40px}
+  .contact h2{font-size:30px;margin-bottom:20px}
+  .irow{display:flex;gap:16px;padding:12px 0;border-bottom:1px dashed var(--line2)}
+  .irow .k{font-family:'IBM Plex Mono';font-size:11px;text-transform:uppercase;color:var(--muted);min-width:75px}
+  .irow .v{font-size:15px}
+  .form .btn{width:100%;border-right:1.5px solid var(--ink);margin-top:6px}
+
+  /* FOOTER — штамп чертежа */
+  footer .wrap{padding:0 28px 28px}
+  .titleblock{border:1.5px solid var(--ink);display:grid;grid-template-columns:2fr 1fr 1fr;margin-top:28px}
+  .titleblock .cell{padding:22px;border-right:1px dashed var(--line2)}
+  .titleblock .cell:last-child{border-right:none}
+  .titleblock .lbl{margin-bottom:10px}
+  .titleblock a{display:block;color:#3c4940;font-size:14px;padding:3px 0;font-family:'IBM Plex Mono'}
+  .titleblock a:hover{color:var(--blue)}
+  .titleblock p{font-size:13px;color:#566254;margin-top:6px}
+  .fbar{display:flex;justify-content:space-between;font-family:'IBM Plex Mono';font-size:11px;color:var(--muted);
+    padding:14px 2px 0;flex-wrap:wrap;gap:8px;text-transform:uppercase;letter-spacing:.5px}
+
+  @media(max-width:920px){
+    nav,.head-r .ph,.dimline{display:none}
+    .stats{grid-template-columns:1fr 1fr}
+    .spec .r{grid-template-columns:54px 1fr 70px}.spec .desc{display:none}
+    .calc,.contact,.pf,.rev,.titleblock{grid-template-columns:1fr}
+    .calc .l,.contact .info{border-right:none;border-bottom:1.5px solid var(--ink)}
+    .rev .q{border-right:none;border-bottom:1px dashed var(--line2)}
+    .hero h1{font-size:38px}
+  }
+</style>
+</head>
+<body>
+<div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+<div class="frame">
+
+<!-- HEADER -->
+<header><div class="wrap">
+  <div class="logo"><span class="b"></span>ИР<i>ТРАНС</i></div>
+  <nav>
+    <a href="#">Ремонт</a><a href="#">Изделия ПВХ</a><a href="#">Шины</a><a href="#">Работы</a><a href="#">Контакты</a>
+  </nav>
+  <div class="head-r">
+    <span class="ph">+375 29 712-08-04</span>
+    <button class="head-cta">Заказать звонок</button>
+  </div>
+</div></header>
+
+<!-- HERO -->
+<div class="hero"><div class="wrap">
+  <div class="dimline">Витебск · с 2002 г.</div>
+  <span class="ann">Лист 01 · Производственное предприятие</span>
+  <h1>Тенты, фургоны и ремонт <em>грузовой техники</em></h1>
+  <div class="lead">
+    <p>Изготовление и ремонт автотентов, рефрижераторов и фургонов, кузовной ремонт, покраска, шиномонтаж и изделия из ткани ПВХ — под ключ.</p>
+    <div class="acts">
+      <button class="btn btn-blue">Рассчитать стоимость</button>
+      <button class="btn btn-out">Наши работы</button>
+    </div>
+  </div>
+</div></div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="s"><span class="ref mono">A1</span><div class="n">20+</div><div class="t">лет на рынке</div></div>
+  <div class="s"><span class="ref mono">A2</span><div class="n">5000+</div><div class="t">работ выполнено</div></div>
+  <div class="s"><span class="ref mono">A3</span><div class="n">2</div><div class="t">направления</div></div>
+  <div class="s"><span class="ref mono">A4</span><div class="n">РФ</div><div class="t">Смоленск · Псков · Брянск</div></div>
+</div>
+
+<!-- SERVICES: РЕМОНТ -->
+<div class="block"><div class="wrap">
+  <div class="blockhead"><h2><span class="num">§01</span>Ремонт и обслуживание</h2><span class="ann">6 позиций спецификации</span></div>
+  <div class="spec">
+    <div class="r"><div class="c code">R-01</div><div class="c name">Ремонт фургонов и рефрижераторов</div><div class="c desc">Полы, панели, двери, кабины, тентовые рукава. Восстановление изотермических фургонов.</div><div class="c act">открыть →</div></div>
+    <div class="r"><div class="c code">R-02</div><div class="c name">Кузовной ремонт и покраска</div><div class="c desc">Большая покрасочная камера для грузовых авто, подбор цвета, гарантия на работы.</div><div class="c act">открыть →</div></div>
+    <div class="r"><div class="c code">R-03</div><div class="c name">Грузовой шиномонтаж</div><div class="c desc">Колёса 14–26″: монтаж, балансировка, ремонт боковых порезов, вулканизация.</div><div class="c act">открыть →</div></div>
+    <div class="r"><div class="c code">R-04</div><div class="c name">Каркасы, ворота, крыши</div><div class="c desc">Изготовление под модель прицепа и полуприцепа.</div><div class="c act">открыть →</div></div>
+    <div class="r"><div class="c code">R-05</div><div class="c name">Пескоструй и дробеструй</div><div class="c desc">Очистка металлоконструкций и деталей с грунтовкой и покраской.</div><div class="c act">открыть →</div></div>
+    <div class="r"><div class="c code">R-06</div><div class="c name">Сварка в среде аргона</div><div class="c desc">Сварка алюминия и нержавейки, ремонт баков, металлоконструкции под заказ.</div><div class="c act">открыть →</div></div>
+  </div>
+</div></div>
+
+<!-- SERVICES: ПВХ -->
+<div class="block"><div class="wrap">
+  <div class="blockhead"><h2><span class="num">§02</span>Изделия из ткани ПВХ</h2><span class="ann">6 позиций спецификации</span></div>
+  <div class="spec">
+    <div class="r"><div class="c code">P-01</div><div class="c name">Мягкие окна и двери</div><div class="c desc">Для террас, веранд, беседок, кафе и павильонов. Прозрачный ПВХ любого размера.</div><div class="c act">открыть →</div></div>
+    <div class="r"><div class="c code">P-02</div><div class="c name">Павильоны, палатки, шатры</div><div class="c desc">Торговые павильоны и тентовые рестораны под ключ, садовые шатры и навесы.</div><div class="c act">открыть →</div></div>
+    <div class="r"><div class="c code">P-03</div><div class="c name">Фермы, ангары, склады</div><div class="c desc">Быстровозводимые тентовые и металлоконструкции производственного назначения.</div><div class="c act">открыть →</div></div>
+    <div class="r"><div class="c code">P-04</div><div class="c name">Реклама на тентах</div><div class="c desc">Печать и нанесение рекламы на тенты, палатки и шатры, рекламные растяжки.</div><div class="c act">открыть →</div></div>
+    <div class="r"><div class="c code">P-05</div><div class="c name">Бассейны, ватрушки, укрытия</div><div class="c desc">Тентовые бассейны, сани-ватрушки, зонтики, навесы и укрытия из ткани ПВХ.</div><div class="c act">открыть →</div></div>
+    <div class="r"><div class="c code">P-06</div><div class="c name">Ремонт изделий из ПВХ</div><div class="c desc">Ремонт тентов, лодок, тентовых конструкций. Сварка и проклейка швов.</div><div class="c act">открыть →</div></div>
+  </div>
+</div></div>
+
+<!-- CALC -->
+<div class="block"><div class="wrap">
+  <div class="calc">
+    <div class="l">
+      <span class="ann" style="margin-bottom:18px">Расчётный лист</span>
+      <h2>Расчёт за минуту</h2>
+      <p>Укажите параметры — получите ориентировочную стоимость сразу, без ожидания менеджера. Точный расчёт — после короткой заявки.</p>
+      <div class="tstamp">Предварительно · не оферта</div>
+    </div>
+    <div class="r">
+      <span class="lbl">Тип работ</span>
+      <select class="ctrl"><option>Изготовление автотента</option><option>Мягкие окна ПВХ</option><option>Грузовой шиномонтаж</option></select>
+      <span class="lbl">Размеры / параметры</span>
+      <input class="ctrl" placeholder="напр. 13,6 × 2,7 м">
+      <div class="calcres"><span class="cl">≈ ИТОГО</span><span class="cv">от 1 850 руб.</span></div>
+      <button class="btn btn-blue" style="width:100%;border-right:1.5px solid var(--ink)">Получить точный расчёт</button>
+    </div>
+  </div>
+</div></div>
+
+<!-- PORTFOLIO -->
+<div class="block"><div class="wrap">
+  <div class="blockhead"><h2><span class="num">§03</span>Наши работы</h2><span class="ann">архив проектов</span></div>
+  <div class="pf">
+    <div class="i"><span class="tag2">PRJ-118</span><div class="schematic">▭</div><div class="cap">Тент на полуприцеп<small>пошив · 13,6 м</small></div></div>
+    <div class="i"><span class="tag2">PRJ-094</span><div class="schematic">⬓</div><div class="cap">Ремонт рефрижератора<small>панели · пол</small></div></div>
+    <div class="i"><span class="tag2">PRJ-141</span><div class="schematic">⊞</div><div class="cap">Мягкие окна · кафе<small>терраса · ПВХ</small></div></div>
+    <div class="i"><span class="tag2">PRJ-076</span><div class="schematic">⌂</div><div class="cap">Торговый павильон<small>под ключ</small></div></div>
+    <div class="i"><span class="tag2">PRJ-159</span><div class="schematic">◿</div><div class="cap">Тентовый ангар<small>металлокаркас</small></div></div>
+    <div class="i"><span class="tag2">PRJ-103</span><div class="schematic">▱</div><div class="cap">Реклама на тенте<small>печать</small></div></div>
+  </div>
+</div></div>
+
+<!-- REVIEWS -->
+<div class="block"><div class="wrap">
+  <div class="blockhead"><h2><span class="num">§04</span>Отзывы</h2><span class="ann">обратная связь</span></div>
+  <div class="rev">
+    <div class="q"><div class="st mono">[ 5/5 ]</div><p>Перешивали тент на фуру — сделали за два дня, всё аккуратно. Возим грузы из Смоленска, заезжаем регулярно.</p><div class="who">Сергей В.</div><div class="role">ИП · грузоперевозки</div></div>
+    <div class="q"><div class="st mono">[ 5/5 ]</div><p>Заказывали мягкие окна на террасу кафе. Замер, изготовление, монтаж — без нареканий. Зиму отстояли отлично.</p><div class="who">Ирина К.</div><div class="role">Кафе «Уют»</div></div>
+    <div class="q"><div class="st mono">[ 5/5 ]</div><p>Ремонт пола фургона и подготовка к техосмотру в одном месте — удобно. Цены адекватные, работают с НДС.</p><div class="who">ООО «ТрансЛогик»</div><div class="role">автопарк</div></div>
+  </div>
+</div></div>
+
+<!-- FAQ -->
+<div class="block"><div class="wrap">
+  <div class="blockhead"><h2><span class="num">§05</span>Частые вопросы</h2><span class="ann">FAQ</span></div>
+  <div class="faq">
+    <div class="ac open"><div class="qr"><span><span class="qn">Q1</span>Колёса какого размера вы обслуживаете?</span><span class="pl">−</span></div><div class="an">Грузовой шиномонтаж — колёса от 14 до 26 дюймов: монтаж, балансировка, ремонт боковых порезов, вулканизация.</div></div>
+    <div class="ac"><div class="qr"><span><span class="qn">Q2</span>Выезжаете ли на замеры тентов?</span><span class="pl">+</span></div><div class="an">Да, выезжаем на замер перед изготовлением тентов и каркасных конструкций.</div></div>
+    <div class="ac"><div class="qr"><span><span class="qn">Q3</span>Работаете ли с перевозчиками из РФ?</span><span class="pl">+</span></div><div class="an">Да, обслуживаем клиентов из Смоленска, Пскова, Брянска и других приграничных регионов.</div></div>
+    <div class="ac"><div class="qr"><span><span class="qn">Q4</span>Можно ли оплатить по безналу?</span><span class="pl">+</span></div><div class="an">Да, работаем с НДС, возможен наличный и безналичный расчёт.</div></div>
+  </div>
+</div></div>
+
+<!-- CONTACT -->
+<div class="block"><div class="wrap">
+  <div class="contact">
+    <div class="info">
+      <span class="ann" style="margin-bottom:16px">Координаты</span>
+      <h2>Контакты</h2>
+      <div class="irow"><span class="k">адрес</span><span class="v">г. Витебск, Бешенковичское шоссе, 40а</span></div>
+      <div class="irow"><span class="k">тел</span><span class="v">+375 29 712-08-04 · +375 212 61-87-73</span></div>
+      <div class="irow"><span class="k">почта</span><span class="v">transavto2010@tut.by</span></div>
+      <div class="irow"><span class="k">режим</span><span class="v">Пн–Пт 8:00–17:00 · Сб 8:00–14:00</span></div>
+    </div>
+    <div class="form">
+      <span class="ann" style="margin-bottom:16px">Бланк заявки</span>
+      <h2>Оставить заявку</h2>
+      <span class="lbl">Имя</span><input class="ctrl" placeholder="Ваше имя">
+      <span class="lbl">Телефон</span><input class="ctrl" placeholder="+375 __ ___-__-__">
+      <span class="lbl">Задача</span><input class="ctrl" placeholder="Что нужно сделать">
+      <button class="btn btn-blue">Отправить заявку</button>
+    </div>
+  </div>
+</div></div>
+
+<!-- FOOTER -->
+<footer><div class="wrap">
+  <div class="titleblock">
+    <div class="cell">
+      <div class="logo" style="font-size:20px"><span class="b"></span>ИР<i>ТРАНС</i></div>
+      <p>ЧПУП «ИРТРАНС» — производство каркасно-тентовых конструкций и ремонт грузовой техники в Витебске с 2002 года.</p>
+    </div>
+    <div class="cell"><span class="lbl">Услуги</span><a href="#">Ремонт фургонов</a><a href="#">Кузовной ремонт</a><a href="#">Шиномонтаж</a><a href="#">Изделия из ПВХ</a></div>
+    <div class="cell"><span class="lbl">Контакты</span><a href="#">+375 29 712-08-04</a><a href="#">transavto2010@tut.by</a><a href="#">Бешенковичское ш., 40а</a></div>
+  </div>
+  <div class="fbar"><span>© 2025 ЧПУП «ИРТРАНС» · УНП 390475775</span><span>Лист 01/01 · демонстрационный прототип</span></div>
+</div></footer>
+
+</div>
+</body>
+</html>
