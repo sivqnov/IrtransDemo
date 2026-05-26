@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ИРТРАНС — макет (стиль карточек)</title>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#e9eaec;          /* светло-серый фон страницы */
+    --card:#ffffff;        /* белые карточки */
+    --ink:#2b2b2b;         /* тёмный текст/заголовки */
+    --beige:#d8c7ad;       /* бежевый акцент */
+    --beige-dk:#cbb795;
+    --beige-soft:#e4d8c4;  /* заливка плиток */
+    --graphite:#2f2f2f;    /* тёмные блоки */
+    --graphite2:#262626;
+    --blue:#2f7fbf;        /* синий ИРТРАНС, точечно */
+    --muted:#7d7d7d;
+    --line:#ececec;
+    --r:30px;              /* крупное скругление карточек-секций */
+    --r-md:22px;           /* скругление вложенных карточек */
+    --r-sm:16px;
+    --pill:999px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:'Comfortaa',cursive;font-weight:700;line-height:1.15;letter-spacing:-.01em}
+  a{text-decoration:none;color:inherit}
+  .wrap{max-width:1320px;margin:0 auto;padding:0 28px}
+  .section{margin:22px 0}
+
+  /* плавающая белая карточка-секция */
+  .panel{background:var(--card);border-radius:var(--r);padding:54px}
+
+  /* pill-кнопки */
+  .pill{display:inline-flex;align-items:center;gap:12px;border-radius:var(--pill);font-family:'Nunito Sans';
+    font-weight:700;font-size:15px;padding:16px 28px;cursor:pointer;border:none;transition:.18s}
+  .pill-dark{background:var(--graphite);color:#fff}
+  .pill-dark:hover{background:#000}
+  .pill-beige{background:var(--beige);color:#3a3024}
+  .pill-beige:hover{background:var(--beige-dk)}
+  .pill-blue{background:var(--blue);color:#fff}
+  .pill-blue:hover{filter:brightness(1.08)}
+  .pill .ar{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:15px}
+  .pill-beige .ar{background:rgba(58,48,36,.12)}
+
+  /* HEADER */
+  header{background:var(--card)}
+  header .wrap{display:flex;align-items:center;height:88px;gap:24px}
+  .logo{font-family:'Comfortaa';font-weight:700;font-size:26px;letter-spacing:1px;color:var(--ink)}
+  .logo i{font-style:normal;color:var(--blue)}
+  .catbtn{display:inline-flex;align-items:center;gap:12px;background:var(--blue);color:#fff;border-radius:var(--pill);
+    padding:14px 26px;font-weight:700;cursor:pointer}
+  .catbtn .bars{display:flex;flex-direction:column;gap:3px}
+  .catbtn .bars span{width:18px;height:2px;background:#fff;border-radius:2px}
+  .search{flex:1;max-width:420px;display:flex;background:#f1f1f1;border-radius:var(--pill);overflow:hidden}
+  .search input{flex:1;border:none;background:transparent;padding:14px 20px;font-family:inherit;font-size:15px;outline:none}
+  .search button{background:var(--graphite);color:#fff;border:none;width:54px;cursor:pointer;font-size:16px}
+  .header-contacts{margin-left:auto;text-align:right;line-height:1.3}
+  .header-contacts .ph{font-family:'Comfortaa';font-weight:700;font-size:18px}
+  .header-contacts .lbl{font-size:12px;color:var(--muted)}
+  .topnav{background:var(--card);border-top:1px solid var(--line)}
+  .topnav .wrap{display:flex;gap:34px;height:52px;align-items:center}
+  .topnav a{font-weight:700;font-size:14px;color:var(--ink)}
+  .topnav a:hover{color:var(--blue)}
+
+  /* HERO */
+  .hero{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:stretch}
+  .hero .htext{display:flex;flex-direction:column;justify-content:center}
+  .hero h1{font-size:clamp(34px,4.4vw,58px);color:var(--ink);text-transform:uppercase;margin-bottom:26px}
+  .hero ul{list-style:none;margin-bottom:34px;display:flex;flex-direction:column;gap:14px}
+  .hero li{padding-left:24px;position:relative;font-size:17px;color:#444}
+  .hero li::before{content:"";position:absolute;left:0;top:11px;width:8px;height:8px;border-radius:50%;background:var(--beige-dk)}
+  /* фото-плейсхолдер */
+  .ph-img{border-radius:var(--r-md);background:
+      repeating-linear-gradient(45deg,#dfe3e8 0 14px,#e7ebef 14px 28px);
+    position:relative;display:flex;align-items:center;justify-content:center;min-height:380px;color:#9aa4ad;font-weight:700}
+  .ph-img .note{font-family:'Nunito Sans';font-size:13px;background:#fff;border-radius:var(--pill);padding:8px 16px;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+  .ph-img .corner{position:absolute;bottom:16px;right:16px;width:48px;height:48px;border-radius:50%;background:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--ink);box-shadow:0 6px 16px rgba(0,0,0,.12)}
+  .hero .dots{display:flex;gap:8px;margin-top:8px}
+  .hero .dots i{width:26px;height:4px;border-radius:2px;background:#dcdcdc}
+  .hero .dots i.on{background:var(--graphite);width:34px}
+
+  /* WELCOME / о компании */
+  .welcome{display:grid;grid-template-columns:1.55fr .9fr;gap:30px}
+  .welcome h2{font-size:clamp(28px,3.4vw,44px);margin-bottom:24px;color:var(--ink)}
+  .welcome p{color:#4a4a4a;margin-bottom:16px;font-size:16px;max-width:640px}
+  .welcome .side{background:#bdbdbd;border-radius:var(--r-md);padding:26px;display:flex;flex-direction:column;justify-content:space-between}
+  .welcome .side .ph-img{min-height:230px;margin-bottom:18px}
+  .welcome .side .cap{font-family:'Comfortaa';font-weight:600;color:#fff;font-size:20px;line-height:1.3}
+  .welcome .btnrow{margin-top:10px}
+
+  /* CATALOG ENTRIES — две крупные карточки */
+  .entries{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .entry{background:var(--card);border-radius:var(--r);padding:30px;display:grid;grid-template-columns:1fr 230px;gap:24px;align-items:center}
+  .entry h3{font-size:26px;color:var(--ink);margin-bottom:22px;line-height:1.25}
+  .entry .ph-img{min-height:230px;border-radius:var(--r-md)}
+
+  /* SPHERES — плитка ниш */
+  .spheres h2{font-size:clamp(28px,3.4vw,44px);margin-bottom:34px;color:var(--ink)}
+  .tiles{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}
+  .tile{background:var(--beige-soft);border-radius:var(--r-md);padding:24px 14px;text-align:center;cursor:pointer;transition:.18s}
+  .tile:hover{background:var(--beige);transform:translateY(-3px)}
+  .tile .ic{height:56px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+  .tile .ic svg{width:48px;height:48px;stroke:#3a3024;stroke-width:1.6;fill:none}
+  .tile .nm{font-size:13px;font-weight:700;color:#3a3024;line-height:1.3}
+
+  /* NEWS */
+  .news h2{font-size:clamp(28px,3.4vw,44px);margin-bottom:32px;color:var(--ink)}
+  .newsgrid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .ncard{border:1px solid #ededed;border-radius:var(--r-md);padding:18px;display:grid;grid-template-columns:230px 1fr;gap:20px;align-items:center}
+  .ncard .ph-img{min-height:200px;border-radius:var(--r-sm)}
+  .ncard .date{font-size:13px;color:var(--muted);margin-bottom:8px}
+  .ncard h4{font-family:'Comfortaa';font-weight:600;font-size:18px;margin-bottom:10px;color:var(--ink)}
+  .ncard p{font-size:14px;color:#555;margin-bottom:16px}
+  .news .foot{display:flex;justify-content:space-between;align-items:center;margin-top:30px}
+  .news .arrows{display:flex;gap:12px}
+  .news .arrows .a{width:54px;height:54px;border-radius:50%;background:#efefef;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px}
+  .news .arrows .a.dark{background:var(--beige)}
+
+  /* CTA — тёмный блок «возникли вопросы» */
+  .cta{background:var(--graphite);border-radius:var(--r);padding:60px;position:relative;overflow:hidden}
+  .cta .inner{max-width:480px;position:relative;z-index:2}
+  .cta h2{color:#fff;font-size:clamp(30px,3.6vw,46px);margin-bottom:18px}
+  .cta p{color:#b9b9b9;margin-bottom:28px;font-size:16px}
+  .cta .note{color:#7a7a7a;font-size:12px;margin-top:14px;max-width:340px}
+  .cta .ghost{position:absolute;right:5%;top:50%;transform:translateY(-50%);font-family:'Comfortaa';font-weight:700;
+    font-size:clamp(80px,14vw,200px);color:rgba(255,255,255,.06);letter-spacing:4px;z-index:1}
+
+  /* FOOTER */
+  footer{background:var(--graphite2);color:#cfcfcf;border-radius:var(--r) var(--r) 0 0;margin-top:22px;padding:54px 0 36px}
+  .fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:30px}
+  .footer-logo{font-family:'Comfortaa';font-weight:700;font-size:24px;color:#fff;letter-spacing:1px}
+  .footer-logo i{color:var(--blue)}
+  .fsoc{display:flex;gap:10px;margin-top:18px}
+  .fsoc a{width:40px;height:40px;border-radius:50%;background:#3a3a3a;display:flex;align-items:center;justify-content:center;color:#cfcfcf}
+  .fcol h4{color:#8c8c8c;font-size:13px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px;font-family:'Nunito Sans';font-weight:800}
+  .fcol a{display:block;color:#cfcfcf;padding:6px 0;font-size:15px}.fcol a:hover{color:#fff}
+  .fcol .phn{font-family:'Comfortaa';font-weight:600;font-size:17px;color:#fff;margin-top:12px}
+  .fcol .phn span{display:block;font-family:'Nunito Sans';font-weight:400;font-size:12px;color:#8c8c8c}
+  .fcopy{max-width:1320px;margin:34px auto 0;padding:22px 28px 0;border-top:1px solid #3a3a3a;color:#8c8c8c;font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+  @media(max-width:1080px){
+    .tiles{grid-template-columns:repeat(4,1fr)}
+    .hero,.welcome,.entries,.newsgrid{grid-template-columns:1fr}
+    .entry{grid-template-columns:1fr}
+    .fgrid{grid-template-columns:1fr 1fr}
+    .panel,.cta{padding:36px}
+    .ncard{grid-template-columns:1fr}
+    .header-contacts,.search,.topnav{display:none}
+  }
+  @media(max-width:560px){ .tiles{grid-template-columns:repeat(2,1fr)} }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="wrap">
+    <div class="logo">ИР<i>ТРАНС</i></div>
+    <button class="catbtn"><span class="bars"><span></span><span></span><span></span></span> Каталог</button>
+    <div class="search"><input placeholder="Поиск по услугам и изделиям"><button>⌕</button></div>
+    <div class="header-contacts">
+      <div class="ph">+375 29 712-08-04</div>
+      <div class="lbl">Витебск · заказать звонок</div>
+    </div>
+  </div>
+  <div class="topnav"><div class="wrap">
+    <a href="#">Главная</a><a href="#">О компании</a><a href="#">Ремонт авто</a><a href="#">Изделия из ПВХ</a><a href="#">Новости</a><a href="#">Контакты</a>
+  </div></div>
+</header>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="section">
+    <div class="panel hero">
+      <div class="htext">
+        <h1>Тенты, фургоны<br>и ремонт грузовой<br>техники</h1>
+        <ul>
+          <li>изготовление и ремонт автотентов</li>
+          <li>рефрижераторы, изотермические фургоны</li>
+          <li>кузовной ремонт, покраска, шиномонтаж</li>
+          <li>изделия из ткани ПВХ под ключ</li>
+        </ul>
+        <div>
+          <button class="pill pill-dark">Рассчитать стоимость <span class="ar">→</span></button>
+        </div>
+        <div class="dots"><i class="on"></i><i></i><i></i></div>
+      </div>
+      <div class="ph-img">
+        <span class="note">📷 фото: тент / ангар / фура</span>
+        <span class="corner">↗</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WELCOME -->
+  <div class="section">
+    <div class="panel welcome">
+      <div>
+        <h2>Производство и ремонт<br>с 2002 года в Витебске</h2>
+        <p>ЧПУП «ИРТРАНС» — это два направления под ключ. Мы ремонтируем и изготавливаем автотенты, рефрижераторы и фургоны, выполняем кузовной ремонт, покраску, грузовой шиномонтаж, пескоструйную обработку и аргоновую сварку.</p>
+        <p>Второе направление — изделия из ткани ПВХ: мягкие окна, торговые павильоны и шатры, тентовые ангары и склады, бассейны, реклама на тентах. Работаем с перевозчиками Беларуси и России — Смоленск, Псков, Брянск.</p>
+        <div class="btnrow"><button class="pill pill-beige">Подробнее о нас <span class="ar">→</span></button></div>
+      </div>
+      <div class="side">
+        <div class="ph-img"><span class="note">📷 фото производства</span></div>
+        <div class="cap">20+ лет опыта<br>5000+ работ</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATALOG ENTRIES -->
+  <div class="section entries">
+    <div class="entry">
+      <div>
+        <h3>Ремонт и обслуживание грузовой техники</h3>
+        <button class="pill pill-beige">Перейти <span class="ar">→</span></button>
+      </div>
+      <div class="ph-img"><span class="corner">↗</span></div>
+    </div>
+    <div class="entry">
+      <div>
+        <h3>Изделия из ткани ПВХ на заказ</h3>
+        <button class="pill pill-beige">Перейти <span class="ar">→</span></button>
+      </div>
+      <div class="ph-img"><span class="corner">↗</span></div>
+    </div>
+  </div>
+
+  <!-- SPHERES -->
+  <div class="section">
+    <div class="panel spheres">
+      <h2>Что мы делаем</h2>
+      <div class="tiles">
+        <div class="tile"><div class="ic"><svg viewBox="0 0 48 48"><rect x="4" y="18" width="26" height="16" rx="2"/><path d="M30 22h8l6 6v6H30z"/><circle cx="14" cy="38" r="3"/><circle cx="36" cy="38" r="3"/></svg></div><div class="nm">Автотенты</div></div>
+        <div class="tile"><div class="ic"><svg viewBox="0 0 48 48"><path d="M8 28h32M10 28l4-12h20l4 12M24 16v-4"/><rect x="18" y="28" width="12" height="12"/></svg></div><div class="nm">Рефрижераторы и фургоны</div></div>
+        <div class="tile"><div class="ic"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="14"/><circle cx="24" cy="24" r="5"/><path d="M24 10v6M24 32v6M10 24h6M32 24h6"/></svg></div><div class="nm">Грузовой шиномонтаж</div></div>
+        <div class="tile"><div class="ic"><svg viewBox="0 0 48 48"><rect x="8" y="14" width="32" height="22" rx="2"/><path d="M8 22h32M16 14v22"/></svg></div><div class="nm">Мягкие окна</div></div>
+        <div class="tile"><div class="ic"><svg viewBox="0 0 48 48"><path d="M6 36V20l18-10 18 10v16"/><path d="M14 36V26h20v10"/></svg></div><div class="nm">Тентовые ангары</div></div>
+        <div class="tile"><div class="ic"><svg viewBox="0 0 48 48"><path d="M24 8l16 10v4H8v-4z"/><path d="M12 22v14M36 22v14M12 36h24"/></svg></div><div class="nm">Павильоны и шатры</div></div>
+        <div class="tile"><div class="ic"><svg viewBox="0 0 48 48"><path d="M8 30c4-4 8-4 12 0s8 4 12 0 8-4 8 0"/><rect x="10" y="14" width="28" height="12" rx="2"/></svg></div><div class="nm">Тентовые бассейны</div></div>
+        <div class="tile"><div class="ic"><svg viewBox="0 0 48 48"><rect x="8" y="12" width="32" height="20" rx="2"/><path d="M14 20h20M14 26h12"/><path d="M20 32v6h8v-6"/></svg></div><div class="nm">Реклама на тентах</div></div>
+        <div class="tile"><div class="ic"><svg viewBox="0 0 48 48"><path d="M10 38V18l14-8 14 8v20"/><path d="M18 38V24h12v14"/><path d="M6 38h36"/></svg></div><div class="nm">Каркасы и крыши</div></div>
+        <div class="tile"><div class="ic"><svg viewBox="0 0 48 48"><path d="M24 6v8M24 6l-6 6M24 6l6 6"/><rect x="14" y="14" width="20" height="14" rx="2"/><path d="M10 40c4-6 24-6 28 0"/></svg></div><div class="nm">Пескоструй и покраска</div></div>
+        <div class="tile"><div class="ic"><svg viewBox="0 0 48 48"><path d="M14 34l8-20 8 20M18 28h8"/><path d="M30 14l6 4-2 6"/></svg></div><div class="nm">Аргоновая сварка</div></div>
+        <div class="tile"><div class="ic"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="16"/><path d="M24 14v10l7 4"/></svg></div><div class="nm">Подготовка к техосмотру</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEWS -->
+  <div class="section">
+    <div class="panel news">
+      <h2>Новости и акции</h2>
+      <div class="newsgrid">
+        <div class="ncard">
+          <div class="ph-img"></div>
+          <div>
+            <div class="date">15.05.2026</div>
+            <h4>Сезон тентов открыт</h4>
+            <p>Принимаем заказы на пошив и ремонт автотентов к новому сезону. Выезд на замер по Витебской области.</p>
+            <button class="pill pill-beige">Подробнее</button>
+          </div>
+        </div>
+        <div class="ncard">
+          <div class="ph-img"></div>
+          <div>
+            <div class="date">28.04.2026</div>
+            <h4>Скидка на шиномонтаж</h4>
+            <p>Грузовой шиномонтаж колёс 14–26″ по специальной цене. Балансировка и ремонт боковых порезов.</p>
+            <button class="pill pill-beige">Подробнее</button>
+          </div>
+        </div>
+      </div>
+      <div class="foot">
+        <button class="pill pill-dark">Все новости <span class="ar">→</span></button>
+        <div class="arrows"><div class="a">←</div><div class="a dark">→</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="section">
+    <div class="cta">
+      <div class="inner">
+        <h2>Возникли вопросы?</h2>
+        <p>Свяжитесь с нами — ответим на все вопросы и рассчитаем стоимость в ближайшее время.</p>
+        <button class="pill pill-blue">Заказать звонок</button>
+        <div class="note">Нажимая кнопку, вы соглашаетесь с условиями политики конфиденциальности</div>
+      </div>
+      <div class="ghost">ИРТРАНС</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap"><div class="fgrid">
+    <div>
+      <div class="footer-logo">ИР<i>ТРАНС</i></div>
+      <div style="color:#8c8c8c;font-size:13px;margin-top:8px">Производство тентов и ремонт<br>грузовой техники · Витебск</div>
+      <div class="fsoc"><a href="#">✈</a><a href="#">в</a></div>
+    </div>
+    <div class="fcol">
+      <h4>О нас</h4>
+      <a href="#">О компании</a><a href="#">Новости</a><a href="#">Доставка и оплата</a><a href="#">Контакты</a>
+    </div>
+    <div class="fcol">
+      <h4>Услуги</h4>
+      <a href="#">Ремонт фургонов</a><a href="#">Кузовной ремонт</a><a href="#">Шиномонтаж</a><a href="#">Изделия из ПВХ</a><a href="#">Тенты и каркасы</a>
+    </div>
+    <div class="fcol">
+      <h4>Контакты</h4>
+      <div class="phn">+375 29 712-08-04<span>Витебск</span></div>
+      <div class="phn">+375 212 61-87-73<span>офис</span></div>
+      <div class="phn" style="font-size:14px">transavto2010@tut.by<span>почта</span></div>
+    </div>
+  </div></div>
+  <div class="fcopy"><span>© 2026 ЧПУП «ИРТРАНС» · УНП 390475775</span><span>Демонстрационный прототип редизайна</span></div>
+</footer>
+
+</body>
+</html>

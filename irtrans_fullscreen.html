@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ИРТРАНС — fullscreen макет</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#081427;
+    --bg2:#0c1d38;
+    --ink:#eef4fc;
+    --muted:#93a8c6;
+    --blue:#2f7fe0;
+    --blue-br:#5ea0ff;
+    --cyan:#48d4e6;
+    --stroke:rgba(255,255,255,.10);
+    --pill:999px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{line-height:1.04;letter-spacing:-.01em}
+  .bebas{font-family:'Bebas Neue',sans-serif;letter-spacing:1px;font-weight:400}
+  a{text-decoration:none;color:inherit}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+  .pill{display:inline-flex;align-items:center;gap:10px;border-radius:var(--pill);font-weight:600;font-size:15px;
+    padding:15px 30px;cursor:pointer;border:none;transition:.18s}
+  .pill-blue{background:var(--blue);color:#fff}.pill-blue:hover{background:var(--blue-br)}
+  .pill-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4)}.pill-ghost:hover{border-color:#fff}
+
+  /* NAV (поверх hero) */
+  nav{position:absolute;top:0;left:0;right:0;z-index:20}
+  nav .wrap{display:flex;align-items:center;height:84px;gap:34px}
+  .logo{font-family:'Bebas Neue';font-size:30px;letter-spacing:2px}
+  .logo i{font-style:normal;color:var(--blue-br)}
+  nav ul{list-style:none;display:flex;gap:30px;margin-left:10px}
+  nav ul a{font-size:14px;font-weight:600;color:#dbe6f5}nav ul a:hover{color:var(--blue-br)}
+  nav .right{margin-left:auto;display:flex;align-items:center;gap:20px}
+  nav .ph{font-weight:700}
+
+  /* HERO fullscreen */
+  .hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;padding-top:84px;
+    background:
+      linear-gradient(180deg,rgba(8,20,39,.7),rgba(8,20,39,.85)),
+      linear-gradient(115deg,#0c2b4d,#081427),
+      repeating-linear-gradient(60deg,rgba(47,127,224,.06) 0 30px,transparent 30px 60px)}
+  .hero::before{content:"";position:absolute;right:-5%;top:10%;width:55%;height:80%;border-radius:40px;
+    background:repeating-linear-gradient(40deg,#10243f 0 18px,#13294a 18px 36px);border:1px solid var(--stroke);
+    box-shadow:0 40px 100px rgba(0,0,0,.4)}
+  .hero::after{content:"📷 главный визуал: фура с тентом / ангар";position:absolute;right:8%;bottom:14%;color:#5f7aa0;
+    font-size:13px;font-weight:600;background:#0a1525;border:1px solid var(--stroke);padding:8px 16px;border-radius:var(--pill)}
+  .hero .inner{position:relative;z-index:5;max-width:620px}
+  .hero .badge{display:inline-flex;align-items:center;gap:9px;background:rgba(94,160,255,.12);border:1px solid rgba(94,160,255,.35);
+    color:var(--blue-br);padding:9px 18px;border-radius:var(--pill);font-size:13px;font-weight:600;margin-bottom:26px}
+  .hero h1{font-family:'Bebas Neue';font-size:clamp(56px,9vw,120px);line-height:.92;margin-bottom:22px;font-weight:400}
+  .hero h1 span{color:var(--blue-br)}
+  .hero p{font-size:19px;color:var(--muted);max-width:480px;margin-bottom:34px}
+  .hero .acts{display:flex;gap:14px;flex-wrap:wrap}
+  .hero .scroll{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);color:var(--muted);font-size:12px;
+    text-transform:uppercase;letter-spacing:2px;z-index:5;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .hero .scroll .ln{width:1px;height:34px;background:linear-gradient(var(--blue-br),transparent)}
+
+  /* STATS strip */
+  .strip{background:var(--blue);}
+  .strip .wrap{display:grid;grid-template-columns:repeat(4,1fr);padding:34px 32px}
+  .strip .s{text-align:center;border-right:1px solid rgba(255,255,255,.2)}
+  .strip .s:last-child{border-right:none}
+  .strip .n{font-family:'Bebas Neue';font-size:48px;line-height:1}
+  .strip .t{font-size:13px;color:rgba(255,255,255,.85);text-transform:uppercase;letter-spacing:.5px}
+
+  /* SPLIT rows */
+  .split{display:grid;grid-template-columns:1fr 1fr;min-height:520px;align-items:stretch}
+  .split.rev .txt{order:2}
+  .split .txt{display:flex;flex-direction:column;justify-content:center;padding:80px}
+  .split .num{font-family:'Bebas Neue';font-size:80px;color:rgba(94,160,255,.18);line-height:.8;margin-bottom:10px}
+  .split .kick{color:var(--blue-br);font-weight:600;text-transform:uppercase;letter-spacing:1px;font-size:13px;margin-bottom:14px}
+  .split h2{font-family:'Bebas Neue';font-size:clamp(40px,4.4vw,64px);margin-bottom:20px;line-height:.95}
+  .split p{color:var(--muted);font-size:17px;max-width:460px;margin-bottom:18px}
+  .split ul{list-style:none;margin-bottom:30px;display:flex;flex-wrap:wrap;gap:10px}
+  .split li{background:rgba(255,255,255,.05);border:1px solid var(--stroke);border-radius:var(--pill);padding:8px 16px;font-size:14px;color:#c5d6ec}
+  .split .img{background:repeating-linear-gradient(45deg,#0f2240 0 18px,#13294a 18px 36px);position:relative;display:flex;align-items:center;justify-content:center}
+  .split .img .note{color:#5f7aa0;font-size:13px;font-weight:600;background:#0a1525;border:1px solid var(--stroke);padding:8px 16px;border-radius:var(--pill)}
+  .split.alt{background:var(--bg2)}
+
+  /* SPHERES band */
+  .spheres{padding:90px 0;text-align:center}
+  .spheres .kick{color:var(--blue-br);font-weight:600;text-transform:uppercase;letter-spacing:1px;font-size:13px}
+  .spheres h2{font-family:'Bebas Neue';font-size:clamp(40px,4.4vw,64px);margin:8px 0 44px}
+  .tiles{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+  .tile{background:var(--bg2);border:1px solid var(--stroke);border-radius:20px;padding:26px 14px;transition:.18s;cursor:pointer}
+  .tile:hover{border-color:rgba(94,160,255,.4);transform:translateY(-4px);background:#102b4d}
+  .tile .ic{height:50px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+  .tile .ic svg{width:42px;height:42px;stroke:var(--blue-br);stroke-width:1.6;fill:none}
+  .tile .nm{font-size:13px;font-weight:600;color:#c5d6ec}
+
+  /* CTA fullwidth */
+  .cta{position:relative;padding:110px 0;text-align:center;overflow:hidden;
+    background:linear-gradient(120deg,#103a6e,#0a1d38)}
+  .cta::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(50deg,rgba(255,255,255,.03) 0 20px,transparent 20px 40px)}
+  .cta .inner{position:relative;z-index:2}
+  .cta h2{font-family:'Bebas Neue';font-size:clamp(44px,5.5vw,84px);margin-bottom:16px}
+  .cta p{color:#bcd0ec;margin-bottom:32px;font-size:18px}
+
+  /* FOOTER */
+  footer{background:#060f1f;padding:56px 0 32px;border-top:1px solid var(--stroke)}
+  .fg{display:grid;grid-template-columns:2fr 1fr 1fr 1.3fr;gap:30px}
+  .fg .logo{font-size:26px;margin-bottom:10px}
+  .fg p{color:var(--muted);font-size:13px;max-width:300px}
+  .fg h4{font-size:12px;text-transform:uppercase;color:var(--blue-br);letter-spacing:.5px;margin-bottom:14px;font-weight:800}
+  .fg a{display:block;color:var(--muted);padding:5px 0;font-size:15px}.fg a:hover{color:#fff}
+  .fcopy{margin-top:34px;padding-top:20px;border-top:1px solid var(--stroke);color:#6e84a0;font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+  @media(max-width:980px){
+    nav ul,nav .ph{display:none}
+    .hero::before,.hero::after{display:none}
+    .strip .wrap{grid-template-columns:1fr 1fr;gap:20px}.strip .s{border:none}
+    .split,.split.rev{grid-template-columns:1fr}.split.rev .txt{order:0}
+    .split .txt{padding:48px}.split .img{min-height:280px}
+    .tiles{grid-template-columns:repeat(3,1fr)}
+    .fg{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:560px){ .tiles{grid-template-columns:repeat(2,1fr)} }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav><div class="wrap">
+  <div class="logo">ИР<i>ТРАНС</i></div>
+  <ul><li><a href="#">Ремонт авто</a></li><li><a href="#">Изделия ПВХ</a></li><li><a href="#">Работы</a></li><li><a href="#">Контакты</a></li></ul>
+  <div class="right"><span class="ph">+375 29 712-08-04</span><button class="pill pill-blue">Заказать звонок</button></div>
+</div></nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap"><div class="inner">
+    <span class="badge">● Производство и ремонт с 2002 года · Витебск</span>
+    <h1>Тенты, фургоны<br>и ремонт<br><span>грузовой техники</span></h1>
+    <p>Изготовление и ремонт автотентов, рефрижераторов и фургонов, кузовной ремонт, покраска, шиномонтаж и изделия из ткани ПВХ — под ключ.</p>
+    <div class="acts">
+      <button class="pill pill-blue">Рассчитать стоимость →</button>
+      <button class="pill pill-ghost">Наши работы</button>
+    </div>
+  </div></div>
+  <div class="scroll"><span>Листайте вниз</span><span class="ln"></span></div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="strip"><div class="wrap">
+  <div class="s"><div class="n">20+</div><div class="t">лет на рынке</div></div>
+  <div class="s"><div class="n">5000+</div><div class="t">работ выполнено</div></div>
+  <div class="s"><div class="n">2</div><div class="t">направления</div></div>
+  <div class="s"><div class="n">РФ</div><div class="t">Смоленск · Псков</div></div>
+</div></div>
+
+<!-- SPLIT 1 -->
+<section class="split">
+  <div class="txt">
+    <div class="num">01</div>
+    <div class="kick">Направление первое</div>
+    <h2>Ремонт грузовой<br>техники</h2>
+    <p>Восстанавливаем и обслуживаем грузовой транспорт: фургоны, рефрижераторы, кузова. Полный цикл — от диагностики до подготовки к техосмотру.</p>
+    <ul><li>Ремонт фургонов</li><li>Кузовной ремонт</li><li>Покраска</li><li>Шиномонтаж 14–26″</li><li>Аргоновая сварка</li><li>Пескоструй</li></ul>
+    <div><button class="pill pill-blue">Все услуги →</button></div>
+  </div>
+  <div class="img"><span class="note">📷 фото ремонта / покрасочной камеры</span></div>
+</section>
+
+<!-- SPLIT 2 (reversed) -->
+<section class="split rev alt">
+  <div class="txt">
+    <div class="num">02</div>
+    <div class="kick">Направление второе</div>
+    <h2>Изделия из<br>ткани ПВХ</h2>
+    <p>Изготавливаем тентовые изделия и конструкции любого назначения — от мягких окон для кафе до промышленных ангаров. Выезд на замер.</p>
+    <ul><li>Мягкие окна</li><li>Павильоны и шатры</li><li>Ангары и склады</li><li>Бассейны</li><li>Реклама на тентах</li><li>Ремонт ПВХ</li></ul>
+    <div><button class="pill pill-blue">В каталог →</button></div>
+  </div>
+  <div class="img"><span class="note">📷 фото тентов / павильонов</span></div>
+</section>
+
+<!-- SPHERES -->
+<section class="spheres"><div class="wrap">
+  <div class="kick">Полный спектр работ</div>
+  <h2>Что мы делаем</h2>
+  <div class="tiles">
+    <div class="tile"><div class="ic"><svg viewBox="0 0 42 42"><rect x="3" y="16" width="22" height="13" rx="2"/><path d="M25 19h6l6 5v5H25z"/><circle cx="12" cy="33" r="2.5"/><circle cx="31" cy="33" r="2.5"/></svg></div><div class="nm">Автотенты</div></div>
+    <div class="tile"><div class="ic"><svg viewBox="0 0 42 42"><path d="M7 25h28M8 25l4-11h18l4 11M21 14v-4"/></svg></div><div class="nm">Рефрижераторы</div></div>
+    <div class="tile"><div class="ic"><svg viewBox="0 0 42 42"><circle cx="21" cy="21" r="12"/><circle cx="21" cy="21" r="4"/></svg></div><div class="nm">Шиномонтаж</div></div>
+    <div class="tile"><div class="ic"><svg viewBox="0 0 42 42"><rect x="7" y="11" width="28" height="20" rx="2"/><path d="M7 19h28M21 11v20"/></svg></div><div class="nm">Мягкие окна</div></div>
+    <div class="tile"><div class="ic"><svg viewBox="0 0 42 42"><path d="M5 31V17l16-9 16 9v14"/><path d="M13 31V23h16v8"/></svg></div><div class="nm">Ангары</div></div>
+    <div class="tile"><div class="ic"><svg viewBox="0 0 42 42"><path d="M21 8l15 8v4H6v-4z"/><path d="M11 20v11M31 20v11M11 31h20"/></svg></div><div class="nm">Павильоны</div></div>
+    <div class="tile"><div class="ic"><svg viewBox="0 0 42 42"><path d="M6 27c4-4 7-4 11 0s7 4 11 0 7-4 8 0"/><rect x="9" y="12" width="24" height="11" rx="2"/></svg></div><div class="nm">Бассейны</div></div>
+    <div class="tile"><div class="ic"><svg viewBox="0 0 42 42"><rect x="7" y="11" width="28" height="17" rx="2"/><path d="M13 18h17M13 23h11"/></svg></div><div class="nm">Реклама</div></div>
+    <div class="tile"><div class="ic"><svg viewBox="0 0 42 42"><path d="M9 33V16l12-7 12 7v17"/><path d="M16 33V22h10v11"/></svg></div><div class="nm">Каркасы</div></div>
+    <div class="tile"><div class="ic"><svg viewBox="0 0 42 42"><path d="M12 31l7-18 7 18M16 25h10"/><path d="M27 13l5 4-3 5"/></svg></div><div class="nm">Сварка</div></div>
+    <div class="tile"><div class="ic"><svg viewBox="0 0 42 42"><path d="M21 8v6M17 11l4-4 4 4"/><path d="M8 35c4-6 22-6 26 0"/></svg></div><div class="nm">Пескоструй</div></div>
+    <div class="tile"><div class="ic"><svg viewBox="0 0 42 42"><circle cx="21" cy="21" r="14"/><path d="M21 12v9l6 4"/></svg></div><div class="nm">Техосмотр</div></div>
+  </div>
+</div></section>
+
+<!-- CTA -->
+<section class="cta"><div class="inner wrap">
+  <h2>Возникли вопросы?</h2>
+  <p>Свяжитесь с нами — рассчитаем стоимость и ответим в ближайшее время.</p>
+  <button class="pill pill-blue" style="background:#fff;color:#103a6e">Заказать звонок</button>
+</div></section>
+
+<!-- FOOTER -->
+<footer><div class="wrap">
+  <div class="fg">
+    <div>
+      <div class="logo">ИР<i>ТРАНС</i></div>
+      <p>ЧПУП «ИРТРАНС» — производство каркасно-тентовых конструкций и ремонт грузовой техники в Витебске с 2002 года.</p>
+    </div>
+    <div><h4>Услуги</h4><a href="#">Ремонт фургонов</a><a href="#">Кузовной ремонт</a><a href="#">Шиномонтаж</a><a href="#">Изделия из ПВХ</a></div>
+    <div><h4>О нас</h4><a href="#">О компании</a><a href="#">Новости</a><a href="#">Контакты</a></div>
+    <div><h4>Контакты</h4><a href="#">+375 29 712-08-04</a><a href="#">+375 212 61-87-73</a><a href="#">transavto2010@tut.by</a><a href="#">Витебск, Бешенковичское ш., 40а</a></div>
+  </div>
+  <div class="fcopy"><span>© 2026 ЧПУП «ИРТРАНС» · УНП 390475775</span><span>Демонстрационный прототип редизайна</span></div>
+</div></footer>
+
+</body>
+</html>

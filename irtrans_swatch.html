@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ИРТРАНС — swatch макет</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#091627;
+    --panel:#0e2038;
+    --panel2:#122842;
+    --ink:#eaf2fc;
+    --blue:#2f7fe0;
+    --blue-br:#5ea0ff;
+    --cyan:#3fd6e0;
+    --muted:#90a6c4;
+    --stroke:rgba(255,255,255,.10);
+    --stroke-hi:rgba(94,160,255,.45);
+    --r:14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .mono{font-family:'IBM Plex Mono',monospace}
+  h1,h2,h3{font-weight:700;line-height:1.06;letter-spacing:-.015em}
+  a{text-decoration:none;color:inherit}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 28px}
+  .label{font-family:'IBM Plex Mono';font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--blue-br)}
+
+  /* HEADER */
+  header{border-bottom:1px solid var(--stroke);position:sticky;top:0;z-index:30;background:rgba(9,22,39,.9);backdrop-filter:blur(10px)}
+  header .wrap{display:flex;align-items:center;height:74px;gap:28px}
+  .logo{font-weight:800;font-size:22px;letter-spacing:1px}
+  .logo i{font-style:normal;color:var(--blue-br)}
+  .logo::after{content:"PVC";font-family:'IBM Plex Mono';font-size:10px;background:var(--blue);color:#fff;padding:2px 6px;margin-left:8px;border-radius:4px;vertical-align:middle;letter-spacing:1px}
+  nav{display:flex;gap:24px;margin-left:6px}
+  nav a{font-size:14px;font-weight:600;color:var(--muted)}nav a:hover{color:#fff}
+  .head-r{margin-left:auto;display:flex;align-items:center;gap:16px}
+  .head-r .ph{font-weight:700;font-size:15px}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:14px;padding:12px 22px;border-radius:10px;cursor:pointer;border:none;transition:.16s}
+  .btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{background:var(--blue-br)}
+  .btn-ghost{background:transparent;color:#fff;border:1px solid var(--stroke)}.btn-ghost:hover{border-color:var(--stroke-hi)}
+
+  /* HERO — спецификация материала */
+  .hero{padding:54px 0;border-bottom:1px solid var(--stroke)}
+  .hero .grid{display:grid;grid-template-columns:1.25fr 1fr;gap:40px;align-items:center}
+  .hero .label{margin-bottom:20px}
+  .hero h1{font-size:clamp(38px,5.6vw,72px);margin-bottom:22px}
+  .hero h1 span{color:var(--blue-br)}
+  .hero p{font-size:18px;color:var(--muted);max-width:500px;margin-bottom:30px}
+  .hero .acts{display:flex;gap:14px;flex-wrap:wrap}
+  /* свотч-карта справа */
+  .swatchcard{border:1px solid var(--stroke);border-radius:18px;overflow:hidden;background:var(--panel)}
+  .swatchcard .top{height:230px;position:relative;
+    background:
+      repeating-linear-gradient(135deg,rgba(255,255,255,.05) 0 2px,transparent 2px 7px),
+      repeating-linear-gradient(45deg,rgba(0,0,0,.18) 0 2px,transparent 2px 7px),
+      linear-gradient(135deg,#2f7fe0,#143a6b)}
+  .swatchcard .top .chip{position:absolute;top:14px;left:14px;font-family:'IBM Plex Mono';font-size:11px;background:rgba(9,22,39,.7);
+    border:1px solid var(--stroke);padding:5px 10px;border-radius:6px}
+  .swatchcard .spec{padding:20px 22px}
+  .swatchcard .spec .row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--stroke);font-size:13px}
+  .swatchcard .spec .row:last-child{border-bottom:none}
+  .swatchcard .spec .k{font-family:'IBM Plex Mono';color:var(--muted);text-transform:uppercase;font-size:11px;letter-spacing:.5px}
+  .swatchcard .spec .v{font-weight:600}
+
+  /* PALETTE strip — образцы цветов ткани */
+  .palette{border-bottom:1px solid var(--stroke)}
+  .palette .wrap{padding:26px 28px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+  .palette .label{white-space:nowrap}
+  .palette .chips{display:flex;gap:10px;flex-wrap:wrap}
+  .palette .sw{width:46px;height:46px;border-radius:10px;border:1px solid var(--stroke);position:relative;cursor:pointer;transition:.15s}
+  .palette .sw:hover{transform:scale(1.1);border-color:#fff}
+  .palette .meta{margin-left:auto;font-family:'IBM Plex Mono';font-size:12px;color:var(--muted)}
+
+  /* SECTION */
+  .sec{padding:60px 0;border-bottom:1px solid var(--stroke)}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:30px;flex-wrap:wrap;gap:12px}
+  .sec-head h2{font-size:clamp(28px,4vw,48px)}
+  .sec-head .label{text-align:right}
+
+  /* SERVICES — карточки-свотчи */
+  .grid-svc{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .swatch{border:1px solid var(--stroke);border-radius:var(--r);overflow:hidden;background:var(--panel);transition:.16s;cursor:pointer}
+  .swatch:hover{border-color:var(--stroke-hi);transform:translateY(-4px)}
+  .swatch .sample{height:120px;position:relative;display:flex;align-items:flex-end;padding:14px;
+    background:repeating-linear-gradient(135deg,rgba(255,255,255,.04) 0 2px,transparent 2px 8px),linear-gradient(135deg,#1c4f8a,#0e2038)}
+  .swatch:nth-child(2) .sample{background:repeating-linear-gradient(135deg,rgba(255,255,255,.04) 0 2px,transparent 2px 8px),linear-gradient(135deg,#2f7fe0,#0e2038)}
+  .swatch:nth-child(3) .sample{background:repeating-linear-gradient(135deg,rgba(255,255,255,.04) 0 2px,transparent 2px 8px),linear-gradient(135deg,#3fa0c0,#0e2038)}
+  .swatch:nth-child(4) .sample{background:repeating-linear-gradient(135deg,rgba(255,255,255,.04) 0 2px,transparent 2px 8px),linear-gradient(135deg,#2a5f9e,#0e2038)}
+  .swatch:nth-child(5) .sample{background:repeating-linear-gradient(135deg,rgba(255,255,255,.04) 0 2px,transparent 2px 8px),linear-gradient(135deg,#3fd6e0,#0e2038)}
+  .swatch:nth-child(6) .sample{background:repeating-linear-gradient(135deg,rgba(255,255,255,.04) 0 2px,transparent 2px 8px),linear-gradient(135deg,#1c4f8a,#0e2038)}
+  .swatch .art{font-family:'IBM Plex Mono';font-size:11px;background:rgba(9,22,39,.65);border:1px solid var(--stroke);padding:4px 9px;border-radius:6px}
+  .swatch .body{padding:18px 20px}
+  .swatch h3{font-size:18px;margin-bottom:6px}
+  .swatch p{color:var(--muted);font-size:13px;margin-bottom:14px}
+  .swatch .props{display:flex;gap:8px;flex-wrap:wrap}
+  .swatch .prop{font-family:'IBM Plex Mono';font-size:11px;color:var(--blue-br);border:1px solid var(--stroke);padding:3px 8px;border-radius:5px}
+
+  /* CATALOG TABLE — ниши как таблица материалов */
+  .cat{border:1px solid var(--stroke);border-radius:var(--r);overflow:hidden}
+  .cat .crow{display:grid;grid-template-columns:60px 1.4fr 1fr 110px 40px;align-items:center;gap:16px;padding:16px 20px;
+    border-bottom:1px solid var(--stroke);transition:.12s;cursor:pointer}
+  .cat .crow:last-child{border-bottom:none}
+  .cat .crow.h{background:var(--panel2);font-family:'IBM Plex Mono';font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);cursor:default}
+  .cat .crow:not(.h):hover{background:var(--panel)}
+  .cat .sw2{width:34px;height:34px;border-radius:8px;border:1px solid var(--stroke);
+    background:repeating-linear-gradient(135deg,rgba(255,255,255,.06) 0 2px,transparent 2px 7px),linear-gradient(135deg,#2f7fe0,#143a6b)}
+  .cat .nm{font-weight:600}
+  .cat .ds{color:var(--muted);font-size:13px}
+  .cat .pl{font-family:'IBM Plex Mono';font-size:12px;color:var(--blue-br)}
+  .cat .go{text-align:right;color:var(--muted)}
+  .cat .crow:hover .go{color:var(--blue-br)}
+
+  /* STATS */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .stat{border:1px solid var(--stroke);border-radius:var(--r);padding:24px;background:var(--panel)}
+  .stat .n{font-size:40px;font-weight:800;color:var(--blue-br)}
+  .stat .t{font-family:'IBM Plex Mono';font-size:12px;color:var(--muted);text-transform:uppercase;margin-top:4px}
+
+  /* CTA */
+  .cta{border:1px solid var(--stroke-hi);border-radius:18px;padding:50px;background:
+      repeating-linear-gradient(135deg,rgba(255,255,255,.03) 0 2px,transparent 2px 9px),linear-gradient(135deg,#143a6b,#0e2038);
+    display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
+  .cta h2{font-size:clamp(26px,3.4vw,42px)}
+  .cta p{color:var(--muted);margin-top:8px}
+
+  /* FOOTER */
+  footer{padding:48px 0 30px}
+  .fg{display:grid;grid-template-columns:2fr 1fr 1fr 1.3fr;gap:28px}
+  .fg .logo{font-size:20px;margin-bottom:10px}
+  .fg p{color:var(--muted);font-size:13px;max-width:300px}
+  .fg h4{font-family:'IBM Plex Mono';font-size:12px;text-transform:uppercase;color:var(--blue-br);letter-spacing:1px;margin-bottom:12px}
+  .fg a{display:block;color:var(--muted);padding:5px 0;font-size:15px}.fg a:hover{color:#fff}
+  .fcopy{margin-top:30px;padding-top:18px;border-top:1px solid var(--stroke);color:#6e84a0;font-size:12px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-family:'IBM Plex Mono'}
+
+  @media(max-width:980px){
+    nav,.head-r .ph{display:none}
+    .hero .grid{grid-template-columns:1fr;gap:30px}
+    .grid-svc{grid-template-columns:1fr 1fr}
+    .stats{grid-template-columns:1fr 1fr}
+    .cat .crow{grid-template-columns:44px 1.4fr 90px 30px}.cat .ds{display:none}
+    .fg{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:560px){.grid-svc{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header><div class="wrap">
+  <div class="logo">ИР<i>ТРАНС</i></div>
+  <nav><a href="#">Ремонт</a><a href="#">Изделия ПВХ</a><a href="#">Материалы</a><a href="#">Работы</a><a href="#">Контакты</a></nav>
+  <div class="head-r"><span class="ph">+375 29 712-08-04</span><button class="btn btn-blue">Заказать звонок</button></div>
+</div></header>
+
+<!-- HERO -->
+<section class="hero"><div class="wrap"><div class="grid">
+  <div>
+    <div class="label">// Производство и ремонт · Витебск · с 2002</div>
+    <h1>Тенты, фургоны и ремонт <span>грузовой техники</span></h1>
+    <p>Работаем с тканью ПВХ плотностью от 630 до 1680 г/м². Изготовление и ремонт автотентов, фургонов, изделий из ПВХ — под ключ.</p>
+    <div class="acts">
+      <button class="btn btn-blue">Рассчитать стоимость →</button>
+      <button class="btn btn-ghost">Каталог материалов</button>
+    </div>
+  </div>
+  <div class="swatchcard">
+    <div class="top"><span class="chip mono">SAMPLE · PVC-900</span></div>
+    <div class="spec">
+      <div class="row"><span class="k">Материал</span><span class="v">Тентовая ткань ПВХ</span></div>
+      <div class="row"><span class="k">Плотность</span><span class="v">900 г/м²</span></div>
+      <div class="row"><span class="k">Класс горючести</span><span class="v">Г1</span></div>
+      <div class="row"><span class="k">Защита</span><span class="v">УФ · антиплесень</span></div>
+      <div class="row"><span class="k">Применение</span><span class="v">тенты, ангары, окна</span></div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- PALETTE -->
+<div class="palette"><div class="wrap">
+  <span class="label">Палитра материалов</span>
+  <div class="chips">
+    <div class="sw" style="background:#2f7fe0"></div>
+    <div class="sw" style="background:#1c3f6b"></div>
+    <div class="sw" style="background:#3fd6e0"></div>
+    <div class="sw" style="background:#1f6f5a"></div>
+    <div class="sw" style="background:#c0392b"></div>
+    <div class="sw" style="background:#e0a93f"></div>
+    <div class="sw" style="background:#e8e6df"></div>
+    <div class="sw" style="background:#2b2b2b"></div>
+    <div class="sw" style="background:#6a4f9e"></div>
+  </div>
+  <span class="meta">24 цвета · в наличии</span>
+</div></div>
+
+<!-- SERVICES as swatches -->
+<section class="sec"><div class="wrap">
+  <div class="sec-head"><div><div class="label">Направление 01</div><h2>Ремонт техники</h2></div><div class="label">06 позиций</div></div>
+  <div class="grid-svc">
+    <div class="swatch"><div class="sample"><span class="art mono">R-01</span></div><div class="body"><h3>Фургоны и рефрижераторы</h3><p>Полы, панели, двери, кабины, тентовые рукава.</p><div class="props"><span class="prop">ремонт</span><span class="prop">восстановление</span></div></div></div>
+    <div class="swatch"><div class="sample"><span class="art mono">R-02</span></div><div class="body"><h3>Кузовной ремонт и покраска</h3><p>Камера для грузовых, подбор цвета, гарантия.</p><div class="props"><span class="prop">покраска</span><span class="prop">кузов</span></div></div></div>
+    <div class="swatch"><div class="sample"><span class="art mono">R-03</span></div><div class="body"><h3>Грузовой шиномонтаж</h3><p>Колёса 14–26″, балансировка, ремонт порезов.</p><div class="props"><span class="prop">14–26″</span><span class="prop">балансировка</span></div></div></div>
+    <div class="swatch"><div class="sample"><span class="art mono">R-04</span></div><div class="body"><h3>Аргоновая сварка</h3><p>Алюминий, нержавейка, ремонт баков.</p><div class="props"><span class="prop">алюминий</span><span class="prop">нержавейка</span></div></div></div>
+    <div class="swatch"><div class="sample"><span class="art mono">R-05</span></div><div class="body"><h3>Пескоструй и дробеструй</h3><p>Очистка с грунтовкой и покраской.</p><div class="props"><span class="prop">очистка</span><span class="prop">грунт</span></div></div></div>
+    <div class="swatch"><div class="sample"><span class="art mono">R-06</span></div><div class="body"><h3>Подготовка к техосмотру</h3><p>Устранение замечаний под ключ.</p><div class="props"><span class="prop">ТО</span><span class="prop">диагностика</span></div></div></div>
+  </div>
+</div></section>
+
+<!-- CATALOG TABLE -->
+<section class="sec"><div class="wrap">
+  <div class="sec-head"><div><div class="label">Направление 02</div><h2>Изделия из ткани ПВХ</h2></div><div class="label">каталог</div></div>
+  <div class="cat">
+    <div class="crow h"><span>Обр.</span><span>Наименование</span><span>Применение</span><span>Артикул</span><span></span></div>
+    <div class="crow"><span class="sw2"></span><span class="nm">Мягкие окна и двери</span><span class="ds">террасы, кафе, беседки</span><span class="pl mono">PVC-630</span><span class="go">→</span></div>
+    <div class="crow"><span class="sw2" style="background:linear-gradient(135deg,#3fd6e0,#143a6b)"></span><span class="nm">Павильоны и шатры</span><span class="ds">торговые, садовые</span><span class="pl mono">PVC-650</span><span class="go">→</span></div>
+    <div class="crow"><span class="sw2" style="background:linear-gradient(135deg,#1f6f5a,#143a6b)"></span><span class="nm">Ангары и склады</span><span class="ds">производственные</span><span class="pl mono">PVC-900</span><span class="go">→</span></div>
+    <div class="crow"><span class="sw2" style="background:linear-gradient(135deg,#e0a93f,#143a6b)"></span><span class="nm">Реклама на тентах</span><span class="ds">печать, нанесение</span><span class="pl mono">PVC-680</span><span class="go">→</span></div>
+    <div class="crow"><span class="sw2" style="background:linear-gradient(135deg,#c0392b,#143a6b)"></span><span class="nm">Бассейны и укрытия</span><span class="ds">ватрушки, навесы</span><span class="pl mono">PVC-750</span><span class="go">→</span></div>
+    <div class="crow"><span class="sw2" style="background:linear-gradient(135deg,#6a4f9e,#143a6b)"></span><span class="nm">Каркасы и крыши</span><span class="ds">прицепы, полуприцепы</span><span class="pl mono">PVC-1680</span><span class="go">→</span></div>
+  </div>
+</div></section>
+
+<!-- STATS -->
+<section class="sec"><div class="wrap">
+  <div class="stats">
+    <div class="stat"><div class="n">20+</div><div class="t">лет на рынке</div></div>
+    <div class="stat"><div class="n">5000+</div><div class="t">работ выполнено</div></div>
+    <div class="stat"><div class="n">24</div><div class="t">цвета ткани</div></div>
+    <div class="stat"><div class="n">РФ</div><div class="t">Смоленск · Псков</div></div>
+  </div>
+</div></section>
+
+<!-- CTA -->
+<section class="sec" style="border-bottom:none"><div class="wrap">
+  <div class="cta">
+    <div><h2>Подобрать материал и рассчитать?</h2><p>Свяжитесь с нами — поможем выбрать ткань и рассчитаем стоимость.</p></div>
+    <button class="btn btn-blue" style="padding:16px 30px">Заказать звонок →</button>
+  </div>
+</div></section>
+
+<!-- FOOTER -->
+<footer><div class="wrap">
+  <div class="fg">
+    <div>
+      <div class="logo">ИР<i>ТРАНС</i></div>
+      <p>ЧПУП «ИРТРАНС» — производство каркасно-тентовых конструкций и ремонт грузовой техники в Витебске с 2002 года.</p>
+    </div>
+    <div><h4>Услуги</h4><a href="#">Ремонт фургонов</a><a href="#">Кузовной ремонт</a><a href="#">Шиномонтаж</a><a href="#">Изделия ПВХ</a></div>
+    <div><h4>Материалы</h4><a href="#">Тентовая ткань</a><a href="#">Мягкие окна</a><a href="#">Палитра цветов</a></div>
+    <div><h4>Контакты</h4><a href="#">+375 29 712-08-04</a><a href="#">+375 212 61-87-73</a><a href="#">transavto2010@tut.by</a></div>
+  </div>
+  <div class="fcopy"><span>© 2026 ЧПУП «ИРТРАНС» · УНП 390475775</span><span>prototype · redesign</span></div>
+</div></footer>
+
+</body>
+</html>

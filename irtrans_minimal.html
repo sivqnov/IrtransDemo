@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ИРТРАНС — minimal макет</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c1726;          /* очень спокойный тёмно-синий, почти графит */
+    --ink:#e9eef5;
+    --ink-soft:#aab6c6;
+    --muted:#67768a;
+    --blue:#5b9bf0;        /* единственный акцент */
+    --line:rgba(255,255,255,.09);
+    --line-soft:rgba(255,255,255,.05);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-weight:300;
+    -webkit-font-smoothing:antialiased;letter-spacing:.1px}
+  h1,h2,h3{font-weight:400;line-height:1.12;letter-spacing:-.02em}
+  a{text-decoration:none;color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 40px}
+  .num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+  .eyebrow{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-weight:500}
+  .hr{height:1px;background:var(--line);border:none}
+
+  /* HEADER */
+  header{position:sticky;top:0;z-index:30;background:rgba(12,23,38,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+  header .wrap{display:flex;align-items:center;height:78px;gap:40px}
+  .logo{font-size:17px;letter-spacing:3px;font-weight:500}
+  .logo i{font-style:normal;color:var(--blue)}
+  nav{display:flex;gap:34px;margin-left:auto}
+  nav a{font-size:14px;color:var(--ink-soft);font-weight:400}nav a:hover{color:#fff}
+  .head-cta{font-size:14px;color:var(--ink);border-bottom:1px solid var(--blue);padding-bottom:3px}
+  .head-cta:hover{color:var(--blue)}
+
+  /* HERO — максимум воздуха */
+  .hero{padding:140px 0 120px}
+  .hero .eyebrow{margin-bottom:34px}
+  .hero h1{font-size:clamp(40px,6vw,76px);font-weight:300;max-width:16ch;margin-bottom:38px}
+  .hero h1 b{font-weight:500;color:var(--blue)}
+  .hero p{font-size:19px;color:var(--ink-soft);max-width:460px;margin-bottom:46px;font-weight:300}
+  .hero .acts{display:flex;gap:36px;align-items:center}
+  .link{font-size:15px;color:var(--ink);border-bottom:1px solid var(--blue);padding-bottom:4px;transition:.15s}
+  .link:hover{color:var(--blue)}
+  .link-q{font-size:15px;color:var(--muted)}.link-q:hover{color:var(--ink)}
+
+  /* META row */
+  .meta{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .meta .m{padding:34px 0}
+  .meta .n{font-size:38px;font-weight:300}
+  .meta .n b{color:var(--blue);font-weight:400}
+  .meta .t{font-size:13px;color:var(--muted);margin-top:6px}
+
+  /* SECTION */
+  .sec{padding:110px 0}
+  .sechead{display:grid;grid-template-columns:1fr 2fr;gap:40px;margin-bottom:60px;align-items:baseline}
+  .sechead h2{font-size:clamp(26px,3vw,40px);font-weight:300}
+  .sechead .desc{color:var(--ink-soft);font-size:16px;max-width:420px}
+
+  /* SERVICES — список тонкими линиями */
+  .list .row{display:grid;grid-template-columns:60px 1fr 1.4fr 30px;gap:30px;align-items:center;
+    padding:32px 0;border-top:1px solid var(--line);transition:.18s}
+  .list .row:last-child{border-bottom:1px solid var(--line)}
+  .list .row:hover{padding-left:14px}
+  .list .row:hover .nm{color:var(--blue)}
+  .list .idx{font-size:13px;color:var(--muted)}
+  .list .nm{font-size:22px;font-weight:300;transition:.18s}
+  .list .ds{font-size:15px;color:var(--muted);font-weight:300}
+  .list .ar{color:var(--muted);text-align:right;transition:.18s}
+  .list .row:hover .ar{color:var(--blue);transform:translateX(4px)}
+
+  /* SPLIT minimal */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;padding:30px 0}
+  .split .ph{aspect-ratio:4/3;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
+    color:var(--muted);font-size:13px;font-weight:300}
+  .split h3{font-size:30px;font-weight:300;margin-bottom:20px}
+  .split p{color:var(--ink-soft);margin-bottom:18px;font-weight:300}
+  .split .tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+  .split .tags span{font-size:13px;color:var(--ink-soft);border:1px solid var(--line);padding:6px 14px;border-radius:30px;font-weight:300}
+
+  /* INDEX — ниши тонким гридом */
+  .idx{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .idx .c{background:var(--bg);padding:30px 24px;transition:.18s;cursor:pointer}
+  .idx .c:hover{background:#101e33}
+  .idx .c .n{font-size:13px;color:var(--muted)}
+  .idx .c .nm{font-size:16px;font-weight:400;margin-top:10px}
+  .idx .c:hover .nm{color:var(--blue)}
+
+  /* CTA — минимальный, по центру */
+  .cta{padding:130px 0;text-align:center;border-top:1px solid var(--line)}
+  .cta .eyebrow{margin-bottom:26px}
+  .cta h2{font-size:clamp(32px,4.4vw,58px);font-weight:300;margin-bottom:20px}
+  .cta h2 b{color:var(--blue);font-weight:500}
+  .cta p{color:var(--ink-soft);margin-bottom:40px;font-weight:300}
+  .cta .btn{display:inline-block;font-size:15px;color:var(--ink);border:1px solid var(--line);padding:16px 40px;transition:.18s;border-radius:40px}
+  .cta .btn:hover{border-color:var(--blue);color:var(--blue)}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:60px 0 40px}
+  .fg{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px}
+  .fg .logo{display:inline-block;margin-bottom:16px}
+  .fg p{color:var(--muted);font-size:13px;max-width:280px;font-weight:300}
+  .fg h4{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:18px;font-weight:500}
+  .fg a{display:block;color:var(--ink-soft);padding:6px 0;font-size:15px;font-weight:300}.fg a:hover{color:var(--blue)}
+  .fcopy{margin-top:50px;padding-top:24px;border-top:1px solid var(--line-soft);color:var(--muted);font-size:13px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-weight:300}
+
+  @media(max-width:880px){
+    nav{display:none}
+    .meta{grid-template-columns:1fr 1fr}
+    .sechead{grid-template-columns:1fr;gap:16px}
+    .list .row{grid-template-columns:40px 1fr 24px}.list .ds{display:none}
+    .split{grid-template-columns:1fr;gap:30px}
+    .idx{grid-template-columns:1fr 1fr}
+    .fg{grid-template-columns:1fr 1fr}
+    .hero{padding:90px 0 70px}.sec{padding:70px 0}.cta{padding:90px 0}
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header><div class="wrap">
+  <div class="logo">ИР<i>ТРАНС</i></div>
+  <nav><a href="#">Ремонт</a><a href="#">Изделия ПВХ</a><a href="#">Работы</a><a href="#">О компании</a></nav>
+  <a class="head-cta" href="#">+375 29 712-08-04</a>
+</div></header>
+
+<!-- HERO -->
+<section class="hero"><div class="wrap">
+  <div class="eyebrow">Витебск — с 2002 года</div>
+  <h1>Тенты, фургоны и ремонт <b>грузовой техники</b></h1>
+  <p>Изготовление и ремонт автотентов, рефрижераторов и фургонов, кузовной ремонт, покраска, шиномонтаж и изделия из ткани ПВХ — под ключ.</p>
+  <div class="acts">
+    <a class="link" href="#">Рассчитать стоимость</a>
+    <a class="link-q" href="#">Наши работы →</a>
+  </div>
+</div></section>
+
+<!-- META -->
+<div class="wrap"><div class="meta">
+  <div class="m"><div class="n num">20+</div><div class="t">лет на рынке</div></div>
+  <div class="m"><div class="n num">5000+</div><div class="t">работ выполнено</div></div>
+  <div class="m"><div class="n num">2</div><div class="t">направления</div></div>
+  <div class="m"><div class="n">РФ</div><div class="t">Смоленск · Псков</div></div>
+</div></div>
+
+<!-- SERVICES -->
+<section class="sec"><div class="wrap">
+  <div class="sechead">
+    <h2>Ремонт техники</h2>
+    <div class="desc">Полный цикл обслуживания грузового транспорта — от диагностики до подготовки к техосмотру.</div>
+  </div>
+  <div class="list">
+    <div class="row"><span class="idx num">01</span><span class="nm">Фургоны и рефрижераторы</span><span class="ds">Полы, панели, двери, кабины, тентовые рукава.</span><span class="ar">→</span></div>
+    <div class="row"><span class="idx num">02</span><span class="nm">Кузовной ремонт и покраска</span><span class="ds">Камера для грузовых авто, подбор цвета, гарантия.</span><span class="ar">→</span></div>
+    <div class="row"><span class="idx num">03</span><span class="nm">Грузовой шиномонтаж</span><span class="ds">Колёса 14–26″, балансировка, ремонт порезов.</span><span class="ar">→</span></div>
+    <div class="row"><span class="idx num">04</span><span class="nm">Аргоновая сварка</span><span class="ds">Алюминий, нержавейка, ремонт баков.</span><span class="ar">→</span></div>
+    <div class="row"><span class="idx num">05</span><span class="nm">Пескоструй и дробеструй</span><span class="ds">Очистка с последующей грунтовкой и покраской.</span><span class="ar">→</span></div>
+    <div class="row"><span class="idx num">06</span><span class="nm">Подготовка к техосмотру</span><span class="ds">Устранение замечаний под ключ.</span><span class="ar">→</span></div>
+  </div>
+</div></section>
+
+<!-- SPLIT (ПВХ) -->
+<section class="sec" style="padding-top:0"><div class="wrap">
+  <div class="sechead">
+    <h2>Изделия из ПВХ</h2>
+    <div class="desc">Тентовые изделия и конструкции любого назначения — с выездом на замер и монтажом.</div>
+  </div>
+  <div class="split">
+    <div class="ph">фото изделий из ПВХ</div>
+    <div>
+      <h3>От мягких окон до ангаров</h3>
+      <p>Изготавливаем мягкие окна для террас и кафе, торговые павильоны и шатры, промышленные ангары и склады, бассейны, рекламу на тентах.</p>
+      <div class="tags"><span>Мягкие окна</span><span>Павильоны</span><span>Ангары</span><span>Бассейны</span><span>Реклама</span><span>Каркасы</span></div>
+      <a class="link" href="#">Смотреть каталог</a>
+    </div>
+  </div>
+</div></section>
+
+<!-- INDEX ниши -->
+<section class="sec" style="padding-top:0"><div class="wrap">
+  <div class="sechead"><h2>Что мы делаем</h2><div class="desc">Полный спектр работ по двум направлениям.</div></div>
+  <div class="idx">
+    <div class="c"><div class="n num">01</div><div class="nm">Автотенты</div></div>
+    <div class="c"><div class="n num">02</div><div class="nm">Рефрижераторы</div></div>
+    <div class="c"><div class="n num">03</div><div class="nm">Шиномонтаж</div></div>
+    <div class="c"><div class="n num">04</div><div class="nm">Мягкие окна</div></div>
+    <div class="c"><div class="n num">05</div><div class="nm">Ангары и склады</div></div>
+    <div class="c"><div class="n num">06</div><div class="nm">Павильоны</div></div>
+    <div class="c"><div class="n num">07</div><div class="nm">Бассейны</div></div>
+    <div class="c"><div class="n num">08</div><div class="nm">Реклама на тентах</div></div>
+    <div class="c"><div class="n num">09</div><div class="nm">Каркасы и крыши</div></div>
+    <div class="c"><div class="n num">10</div><div class="nm">Аргоновая сварка</div></div>
+    <div class="c"><div class="n num">11</div><div class="nm">Пескоструй</div></div>
+    <div class="c"><div class="n num">12</div><div class="nm">Техосмотр</div></div>
+  </div>
+</div></section>
+
+<!-- CTA -->
+<section class="cta"><div class="wrap">
+  <div class="eyebrow">Свяжитесь с нами</div>
+  <h2>Возникли <b>вопросы?</b></h2>
+  <p>Рассчитаем стоимость и ответим в ближайшее время.</p>
+  <a class="btn" href="#">Заказать звонок</a>
+</div></section>
+
+<!-- FOOTER -->
+<footer><div class="wrap">
+  <div class="fg">
+    <div>
+      <div class="logo">ИР<i>ТРАНС</i></div>
+      <p>Производство каркасно-тентовых конструкций и ремонт грузовой техники в Витебске с 2002 года.</p>
+    </div>
+    <div><h4>Услуги</h4><a href="#">Ремонт фургонов</a><a href="#">Кузовной ремонт</a><a href="#">Шиномонтаж</a><a href="#">Изделия ПВХ</a></div>
+    <div><h4>О нас</h4><a href="#">О компании</a><a href="#">Новости</a><a href="#">Контакты</a></div>
+    <div><h4>Контакты</h4><a href="#">+375 29 712-08-04</a><a href="#">transavto2010@tut.by</a><a href="#">Витебск</a></div>
+  </div>
+  <div class="fcopy"><span>© 2026 ЧПУП «ИРТРАНС» · УНП 390475775</span><span>Демонстрационный прототип редизайна</span></div>
+</div></footer>
+
+</body>
+</html>
