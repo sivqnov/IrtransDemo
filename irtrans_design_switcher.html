@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Иртранс — выбор макета</title>
+    <link rel="shortcut icon" href="https://github.com/sivqnov/IrtransDemo/blob/main/favicon.png?raw=true" type="image/x-icon">
+    <style>
+      :root {
+        --bg:#071831;
+        --bg-alt:#0c1f3d;
+        --glass:rgba(255,255,255,.10);
+        --glass-strong:rgba(255,255,255,.16);
+        --stroke:rgba(255,255,255,.22);
+        --blue:#2f7fe0;
+        --cyan:#36c6e0;
+        --amber:#f6a609;
+        --text:#eaf2ff;
+        --muted:#a9c0de;
+      }
+      *{margin:0;padding:0;box-sizing:border-box}
+      html,body{min-height:100%;font-family:'Manrope',sans-serif;color:var(--text);background:var(--bg);}
+      body{background-image:
+        radial-gradient(900px 500px at 10% 10%, rgba(54,198,224,.24), transparent 55%),
+        radial-gradient(900px 700px at 90% 20%, rgba(246,166,9,.20), transparent 42%),
+        linear-gradient(160deg,#071831 0%,#0a1f3a 45%,#0b2b4d 100%);
+        padding:24px;}
+      a{text-decoration:none;color:inherit}
+      .page{min-height:100vh;display:grid;place-items:center}
+      .panel{width:min(980px,100%);padding:32px;border-radius:32px;background:rgba(255,255,255,.08);border:1px solid var(--stroke);box-shadow:0 24px 80px rgba(0,0,0,.32);backdrop-filter:blur(18px);}
+      .header{display:flex;align-items:center;gap:16px;margin-bottom:32px;flex-wrap:wrap;}
+      .logo-shell{width: sixtypx; height: 60px; display:flex;align-items:center;justify-content:center;border-radius:18px;background:rgba(255,255,255,.12);border:1px solid var(--stroke);}
+      .logo-shell img{width:36px;height:36px;object-fit:contain;}
+      .title-group{display:flex;flex-direction:column;gap:4px;}
+      .brand{font-family:'Sora',sans-serif;font-size:32px;font-weight:800;letter-spacing:.04em;}
+      .brand span{color:var(--amber)}
+      .subtitle{font-size:14px;color:var(--muted);text-transform:uppercase;letter-spacing:.2em;}
+      .description{max-width:720px;color:var(--muted);line-height:1.8;margin-bottom:32px;font-size:15px;}
+      .buttons{display:grid;grid-template-columns:repeat(3,minmax(180px,1fr));gap:20px;}
+      .card{padding:22px 24px;border-radius:24px;background:var(--glass);border:1px solid var(--stroke);box-shadow:0 18px 40px rgba(0,0,0,.20);transition:transform .25s ease,box-shadow .25s ease,background .25s ease;display:flex;flex-direction:column;gap:10px;}
+      .card:hover{transform:translateY(-10px);box-shadow:0 32px 60px rgba(0,0,0,.28);background:rgba(255,255,255,.16);}
+      .card-title{font-family:'Sora',sans-serif;font-size:18px;font-weight:700;}
+      .card-text{font-size:14px;color:var(--muted);line-height:1.65;}
+      .card-link{margin-top:auto;display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:999px;background:linear-gradient(135deg,rgba(54,198,224,.24),rgba(246,166,9,.22));color:#fff;font-weight:700;letter-spacing:.02em;transition:background .25s ease,transform .25s ease;}
+      .card-link:hover{background:linear-gradient(135deg,var(--cyan),var(--amber));transform:translateY(-2px);}
+      .footer{margin-top:24px;text-align:center;color:var(--muted);font-size:13px;}
+      @media(max-width:860px){.buttons{grid-template-columns:1fr 1fr}} 
+      @media(max-width:640px){.header{justify-content:center;text-align:center;} .footer{padding-top:12px;} .buttons{grid-template-columns:1fr;} }
+    </style>
+</head>
+<body>
+  <div class="page">
+    <section class="panel">
+      <div class="header">
+        <div class="logo-shell">
+          <img src="https://github.com/sivqnov/IrtransDemo/blob/main/favicon.png?raw=true" alt="Иртранс логотип">
+        </div>
+        <div class="title-group">
+          <div class="subtitle">Переключатель макетов</div>
+          <div class="brand">Иртранс</div>
+        </div>
+      </div>
+      <p class="description">Выберите тему страницы для просмотра. Все макеты адаптированы под темный стиль и выполнены в единой стилистике с плавными стеклянными панелями, мягкими тенями и современными кнопками.</p>
+      <div class="buttons">
+        <a class="card" href="https://sivqnov.github.io/IrtransDemo/irtrans_blueprint.html">
+          <div class="card-title">Blueprint</div>
+          <div class="card-text">Чистый архитектурный стиль с синими акцентами и технической графикой.</div>
+          <span class="card-link">Открыть</span>
+        </a>
+        <a class="card" href="https://sivqnov.github.io/IrtransDemo/irtrans_glass.html">
+          <div class="card-title">Glass</div>
+          <div class="card-text">Стеклянный футуристичный дизайн с мягкой подсветкой и переливами.</div>
+          <span class="card-link">Открыть</span>
+        </a>
+        <a class="card" href="https://sivqnov.github.io/IrtransDemo/irtrans_home.html">
+          <div class="card-title">Home</div>
+          <div class="card-text">Теплый домашний стиль с уютной атмосферой и приветливой подачей.</div>
+          <span class="card-link">Открыть</span>
+        </a>
+        <a class="card" href="https://sivqnov.github.io/IrtransDemo/irtrans_industrial.html">
+          <div class="card-title">Industrial</div>
+          <div class="card-text">Твердый индустриальный характер с металлическими фактурами и динамикой.</div>
+          <span class="card-link">Открыть</span>
+        </a>
+        <a class="card" href="https://sivqnov.github.io/IrtransDemo/irtrans_soft.html">
+          <div class="card-title">Soft</div>
+          <div class="card-text">Мягкая и спокойная тема с нежными оттенками и пластичной типографикой.</div>
+          <span class="card-link">Открыть</span>
+        </a>
+      </div>
+      <div class="footer">Все страницы открываются в новой вкладке, если браузер настроен так.</div>
+    </section>
+  </div>
+</body>
+</html>
